@@ -44,7 +44,7 @@ spec:
   selector:
     app: cassandra
 ```
-For now, we don't need any load-balancing or proxying done in our sample app. We can create the headless service using the provided yaml file:
+For now, you don't need any load-balancing or proxying done in this sample app. You can create the headless service using the provided yaml file:
 ```bash
 $ kubectl create -f cassandra-service.yaml
 service "cassandra" created
@@ -95,20 +95,20 @@ spec:
         - name: data
           emptyDir: {}
 ```
-The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. We can place how much resources will be used for each pod inside the template and limit the resources they can use.  We can create a Replication Controller using the provided yaml file with 1 replica:
+The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. You can set how much resources will be used for each pod inside the template and limit the resources they can use.  You can create a Replication Controller using the provided yaml file with 1 replica:
 ```bash
 $ kubectl create -f cassandra-controller.yaml
 replicationcontroller "cassandra" created
 ```
 
 # 3. Validate the Replication Controller
-We can view a list of Replication Controllers using this command:
+You can view a list of Replication Controllers using this command:
 ```bash
 $ kubectl get rc
 NAME        DESIRED   CURRENT   READY     AGE
 cassandra   1         1         1         1m
 ```
-If we view a list of our Pods, we should see 1 pod running. Use this command to view the Pods created by the Replication Controller:
+If you view the list of the Pods, you should see 1 Pod running. Use this command to view the Pods created by the Replication Controller:
 
 ```bash
 $ kubectl get pods -o wide
@@ -116,22 +116,22 @@ NAME              READY     STATUS    RESTARTS   AGE       IP              NODE
 cassandra-xxxxx   1/1       Running   0          1m        172.xxx.xxx.xxx   169.xxx.xxx.xxx
 ``` 
 
-To increase the number of Pods, we can scale our Replication Controller as many as our available resources can acccomodate. Proceed to the next step.
+To increase the number of Pods, you can scale the Replication Controller as many as the available resources can acccomodate. Proceed to the next step.
 
 # 4. Scale the Replication Controller
 
-To scale our Replication Controller, use this command:
+To scale the Replication Controller, use this command:
 ```bash
 $ kubectl scale rc cassandra --replicas=2
 replicationcontroller "cassandra" scaled
 ```
-After scaling, we should see that our desired number has increased.
+After scaling, you should see that your desired number has increased.
 ```bash
 $ kubectl get rc
 NAME        DESIRED   CURRENT   READY     AGE
 cassandra   2         2         2         3m
 ```
-We can also list our Pods again to confirm that our Pods are up and running.
+You can view the list of the Pods again to confirm that your Pods are up and running.
 ```bash
 $ kubectl get pods -o wide
 NAME              READY     STATUS    RESTARTS   AGE       IP              NODE
@@ -182,7 +182,7 @@ subsets:
 
 
 
-We can access the cassandra container using the following command:
+You can access the cassandra container using the following command:
 
 **Substitute the Pod name to the one you have**
 
@@ -192,7 +192,7 @@ root@cassandra-xxxxx:/# ls
 bin  boot  dev	docker-entrypoint.sh  etc  home  initial-seed.cql  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-Now we run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
+Now run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
 ```bash
 root@cassandra-xxxxx:/# cqlsh -f initial-seed.cql
 root@cassandra-xxxxx:/# cqlsh

@@ -29,7 +29,7 @@ This scenario provides instructions for the following tasks:
 This tutorial is intended for software developers who have never deployed an application on Kubernetes cluster before.
 
 # 1. Create a Cassandra Headless Service
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -50,7 +50,7 @@ service "cassandra" created
 ```
 # 2. Create a Replication Controller
 
-```
+```yaml
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -93,7 +93,6 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
-
 ```
 The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. We can create a Replication Controller using the provided yaml file with 1 replica:
 ```bash
@@ -182,7 +181,6 @@ We can access the cassandra container using the following command:
 $ kubectl exec -it cassandra-xxxxx /bin/bash
 root@cassandra-xxxxx:/# ls
 bin  boot  dev	docker-entrypoint.sh  etc  home  initial-seed.cql  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
-
 ```
 
 Now we run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
@@ -230,5 +228,4 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       1 |       SF |    David | 9848022338 |   50000
       2 |      SJC |    Robin | 9848022339 |   40000
       3 |   Austin |      Bob | 9848022330 |   45000
-
 ```

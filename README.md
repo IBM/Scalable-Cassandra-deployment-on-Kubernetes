@@ -186,8 +186,6 @@ We can access the cassandra container using the following command:
 
 **Substitute the Pod name to the one you have**
 
-We can access the cassandra container using the following command:
-
 ```bash
 $ kubectl exec -it cassandra-xxxxx /bin/bash
 root@cassandra-xxxxx:/# ls

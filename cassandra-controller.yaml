@@ -45,7 +45,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          image: docker.io/anthonyamanse/cassandra:3.0
+          image: ishangulhane/cassandra
           name: cassandra
           ports:
             - containerPort: 7000

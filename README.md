@@ -29,6 +29,7 @@ This scenario provides instructions for the following tasks:
 This tutorial is intended for software developers who have never deployed an application on Kubernetes cluster before.
 
 # 1. Create a Cassandra Headless Service
+Here is the Service description for the headless Service:
 ```yaml
 apiVersion: v1
 kind: Service
@@ -43,13 +44,13 @@ spec:
   selector:
     app: cassandra
 ```
-For now, we don't need any load-balancing or proxying done in our sample app. We can create a headless service using the provided yaml file:
+For now, we don't need any load-balancing or proxying done in our sample app. We can create the headless service using the provided yaml file:
 ```bash
 $ kubectl create -f cassandra-service.yaml
 service "cassandra" created
 ```
 # 2. Create a Replication Controller
-
+Here is the Replication Controller description:
 ```yaml
 apiVersion: v1
 kind: ReplicationController
@@ -58,7 +59,7 @@ metadata:
     app: cassandra
   name: cassandra
 spec:
-  replicas: 2
+  replicas: 1
   selector:
       app: cassandra
   template:
@@ -94,7 +95,7 @@ spec:
         - name: data
           emptyDir: {}
 ```
-The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. We can create a Replication Controller using the provided yaml file with 1 replica:
+The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. We can place how much resources will be used for each pod inside the template and limit the resources they can use.  We can create a Replication Controller using the provided yaml file with 1 replica:
 ```bash
 $ kubectl create -f cassandra-controller.yaml
 replicationcontroller "cassandra" created
@@ -138,7 +139,7 @@ cassandra-1lt0j   1/1       Running   0          3m        172.xxx.xxx.xxx   169
 cassandra-vsqx4   1/1       Running   0          17s       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 ```
 You can check that the Pods are visible to the Service using the following service endpoints query:
-```
+```bash
 $ kubectl get endpoints cassandra -o yaml
 apiVersion: v1
 kind: Endpoints
@@ -174,17 +175,27 @@ subsets:
     protocol: TCP
 ```
 # 5. Using CQL
+> **Note:** It can take around 5-10 minutes for the Cassandra database to finish its setup. You may encounter an error if you did the following commands before the setup is complete.
+> You can check if the pod has started listening on its localhost:
+> ```bash
+> $kubectl logs cassandra-xxxxx
+
+
 
 We can access the cassandra container using the following command:
 
-```
+**Substitute the Pod name to the one you have**
+
+We can access the cassandra container using the following command:
+
+```bash
 $ kubectl exec -it cassandra-xxxxx /bin/bash
 root@cassandra-xxxxx:/# ls
 bin  boot  dev	docker-entrypoint.sh  etc  home  initial-seed.cql  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
 Now we run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
-```
+```bash
 root@cassandra-xxxxx:/# cqlsh -f initial-seed.cql
 root@cassandra-xxxxx:/# cqlsh
 Connected to Test Cluster at 127.0.0.1:9042.

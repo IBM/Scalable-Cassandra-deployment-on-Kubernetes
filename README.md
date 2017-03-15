@@ -176,15 +176,21 @@ subsets:
 ```
 # 5. Using CQL
 > **Note:** It can take around 5-10 minutes for the Cassandra database to finish its setup. You may encounter an error if you did the following commands before the setup is complete.
-> You can check if the pod has started listening on its localhost:
-> ```bash
-> $kubectl logs cassandra-xxxxx
+
+You can check if the Cassandra in the Pod is up and running by using this command:
+**Substitute the Pod name to the one you have**
+```bash
+$ kubectl exec cassandra-xxxxx -- nodetool status
+Datacenter: DC1
+===============
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  172.xxx.xxx.xxx  168.59 KB  256          100.0%            b3386112-deef-4fef-8d31-691d89a78e0e  Kubernetes Cluster
 
 
 
 You can access the cassandra container using the following command:
-
-**Substitute the Pod name to the one you have**
 
 ```bash
 $ kubectl exec -it cassandra-xxxxx /bin/bash

@@ -12,8 +12,8 @@ This tutorial demonstrates the deployment of Cassandra on Kubernetes. With IBM®
 * Clone this repository for the necessary files and go inside the directory
 
 	```bash
-    $ git clone https://github.com/IBM/container-service-cassandra-sample.git
-    $ cd container-service-cassandra-sample
+    $ git clone https://github.com/IBM/cassandra-sample.git
+    $ cd cassandra-sample
     ```
 
 ## Objectives

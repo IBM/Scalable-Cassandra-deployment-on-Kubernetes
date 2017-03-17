@@ -1,6 +1,8 @@
-FROM cassandra:latest
-MAINTAINER Ishan Gulhane <ishan.gulhane@ibm.com>
-ENV REFRESHED_AT 2017-03-15
+FROM cassandra:3.0
+
+RUN apt-get -qq update && apt-get install -y dnsutils && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 COPY initial-seed.cql /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY custom-entrypoint.sh /
+ENTRYPOINT ["/custom-entrypoint.sh"]
 CMD ["cassandra", "-f"]

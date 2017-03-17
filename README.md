@@ -1,11 +1,11 @@
 # Container Service Cassandra Sample
 
-This tutorial demonstrates the deployment of Cassandra on Kubernetes. With IBM® Bluemix® Container Service, you can deploy and manage your own Kubernetes cluster in the cloud that lets you automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts called worker nodes. 
+This tutorial demonstrates the deployment of Cassandra on Kubernetes. With IBM® Bluemix® Container Service, you can deploy and manage your own Kubernetes cluster in the cloud that lets you automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts called worker nodes.
 
 
 ## Prerequisite
 
-* Create a Kubernetes cluster with IBM Bluemix Container Service. 
+* Create a Kubernetes cluster with IBM Bluemix Container Service.
 
 	* If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-service-wordpress-sample/blob/master/creating-a-kubernetes-cluster.md) tutorial.
 
@@ -114,7 +114,7 @@ If you view the list of the Pods, you should see 1 Pod running. Use this command
 $ kubectl get pods -o wide
 NAME              READY     STATUS    RESTARTS   AGE       IP              NODE
 cassandra-xxxxx   1/1       Running   0          1m        172.xxx.xxx.xxx   169.xxx.xxx.xxx
-``` 
+```
 
 To increase the number of Pods, you can scale the Replication Controller as many as the available resources can acccomodate. Proceed to the next step.
 
@@ -245,3 +245,5 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       2 |      SJC |    Robin | 9848022339 |   40000
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
+
+[![Build Status](https://travis-ci.org/IBM/cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/cassandra-sample)

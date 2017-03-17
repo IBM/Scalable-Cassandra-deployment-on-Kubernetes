@@ -1,0 +1,11 @@
+deploy:
+  edge: true
+  provider: bluemixcloudfoundry
+  username: ishan.gulhane@ibm.com
+  password:
+    secure: Le545tLGC5Czl4N3RkObsESkMqge7oy/gyGzxD/rymWcppza0E7o8DI0adQhWdTkWMSmvJJqhXCWI5y/+CUEvTFR6r7izFGmWLH6Gs+uRU5jx82NW5joZPgTLT5qsoZY8vaEA0JHdkyEg/lrcxx69LnaX4+QywRu+rF7V6SFjoABRvmIBFLcLEYNb2tn6cfWcGpUjtAKJDVxtTEOA/q4tbKsX41D7ciUnhvnk+UCOdo9w1i9D5fpZ/807pKrNeYHV0dMb4UpaZF8kklPUsCQgQejOL6i9WB8QklF2+CtSribxacRt2lBWIIWKKPsDbJypvUnyq2UoPqBOeO9FFYfXWipexnCWnKgWKJjB7t5s58dO+hEIV9ONxDULnQUOFpuKlk15sQBH4ekIkfcjPAb+mq+2g3GlOrJ6DTozZysnIjCjpk6UhEAtHledmK6sxOePFAKZDzvQv/f7PG+6UqXoD1BR+phP1LY52NOGmn9Oxc7+6ZRh0GgMqbI8moe3245m7wGDms263KvRxvpcvyfUztuE3hpMn3msi74hJ8faw+IkL63eNDR6kU3iVFUBfdKEeJu5myhlgpxeqfPXtSv4FE9smc1tlPGPi++ngebL0W2OkqB0EH7qvH6ejlmA/kRz6GTpQ9i2JrvLx8nRee6YBi4mpzOnpa8ug6OB5P78gw=
+  organization: IBM
+  space: staging
+  manifest: manifest.yml
+  region: ng
+  api: https://api.ng.bluemix.net

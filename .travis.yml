@@ -2,4 +2,4 @@ language: bash
 script: true
 sudo: required
 before_install:
-- bash install.sh
+- cat input.txt | bash install.sh

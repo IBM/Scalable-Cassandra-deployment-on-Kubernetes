@@ -19,4 +19,5 @@ git clone https://github.com/IBM/cassandra-sample
 cd cassandra-sample
 echo "inside the cassandra-sample folder"
 bx cs cluster-create --name "cassandra-demo"
+sleep 600
 bx cs workers cassandra-demo

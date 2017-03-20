@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/AnthonyAmanse/cassandra-sample.svg?branch=master)](https://travis-ci.org/AnthonyAmanse/cassandra-sample)
+[![Build Status](https://travis-ci.org/IBM/cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/cassandra-sample)
 
 # Container Service Cassandra Sample
 

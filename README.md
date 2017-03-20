@@ -10,9 +10,9 @@ This tutorial is intended for software developers who have never deployed an app
 
 ## Table of Contents
 
-A. [Prerequisites](https://github.com/IBM/cassandra-sample#Prerequisite)
+A. [Prerequisites](https://github.com/IBM/cassandra-sample#prerequisites)
 
-B. [Objectives](https://github.com/IBM/cassandra-sample#Objectives)
+B. [Objectives](https://github.com/IBM/cassandra-sample#objectives)
 
 C. Cassandra Cluster
 

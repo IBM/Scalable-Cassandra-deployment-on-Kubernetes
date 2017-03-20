@@ -9,6 +9,7 @@ tar -xvf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
 sudo ./install_bluemix_cli
 bx plugin install container-service -r Bluemix
-bx login -a https://api.ng.bluemix.net -u ishangulhane55@gmail.com  -p Igulhane73 --skip-ssl-validation
+bx login -u ishangulhane55@gmail.com  -p Igulhane73
+bx cs init
 bx cs cluster-create my-cassandra-cluster
 bx cs workers my-cassandra-cluster

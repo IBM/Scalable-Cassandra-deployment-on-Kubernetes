@@ -4,5 +4,7 @@ curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github"
 sudo mv cf /usr/local/bin
 sudo curl -o /usr/share/bash-completion/completions/cf https://raw.githubusercontent.com/cloudfoundry/cli/master/ci/installers/completion/cf
 cf --version
-cf add-plugin-repo bluemix-cf https://plugins.ng.bluemix.net
-cf install-plugin plugin_name -r bluemix-cf -f 
+curl -L public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.5.1_amd64.tar.gz > Bluemix_CLI.tar.gz
+tar -xvf Bluemix_CLI.tar.gz
+cd Bluemix_CLI
+sudo ./install_bluemix_cli

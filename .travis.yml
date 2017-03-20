@@ -1,5 +1,2 @@
-{
-  "group": "stable",
-  "dist": "precise",
-  "os": "linux"
-}
+language: bash
+script: true

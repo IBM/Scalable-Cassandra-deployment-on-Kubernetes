@@ -9,4 +9,4 @@ tar -xvf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
 sudo ./install_bluemix_cli
 bx plugin install container-service -r Bluemix
-bx login -a https://api.ng.bluemix.net
+bx login -a https://api.ng.bluemix.net -u anthonyamanse@clouddragons.com

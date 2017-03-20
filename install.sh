@@ -14,10 +14,13 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 echo "kubectl installed!"
-$(bx cs cluster-config test-cassandra | grep -v "Downloading" | grep -v "OK" | grep -v "The")
 git clone https://github.com/IBM/cassandra-sample
 cd cassandra-sample
 echo "inside the cassandra-sample folder"
 bx cs cluster-create --name "cassandra-demo"
 sleep 600
 bx cs workers cassandra-demo
+$(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
+kubectl create -f cassandra-service.yaml
+kubectl create -f cassandra-controller.yaml
+echo "HEADLESS SERVICE and REPLICATION CONTROLLER CREATED!"

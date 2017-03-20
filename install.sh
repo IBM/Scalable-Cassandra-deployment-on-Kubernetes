@@ -18,7 +18,10 @@ git clone https://github.com/IBM/cassandra-sample
 cd cassandra-sample
 echo "inside the cassandra-sample folder"
 bx cs cluster-create --name "cassandra-demo"
-sleep 600
+sleep 5m
+echo "slept for 5m"
+sleep 5m
+echo "slept for 5m"
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
 kubectl create -f cassandra-service.yaml

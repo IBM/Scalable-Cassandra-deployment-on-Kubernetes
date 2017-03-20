@@ -10,13 +10,17 @@ This tutorial is intended for software developers who have never deployed an app
 
 ## Table of Contents
 
-### A. [Prerequisites](https://github.com/IBM/cassandra-sample#Prerequisite)
-### B. [Objectives](https://github.com/IBM/cassandra-sample#Objectives)
-### 1. [Create a Cassandra Headless Service](https://github.com/IBM/cassandra-sample#1-create-a-cassandra-headless-service)
-### 2. [Create a Replication Controller](https://github.com/IBM/cassandra-sample#2-create-a-replication-controller)
-### 3. [Validate the Replication Controller](https://github.com/IBM/cassandra-sample#3-validate-the-replication-controller)
-### 4. [Scale the Replication Controller](https://github.com/IBM/cassandra-sample#4-scale-the-replication-controller)
-### 5. [Using CQL](https://github.com/IBM/cassandra-sample#5-using-cql)
+A. [Prerequisites](https://github.com/IBM/cassandra-sample#Prerequisite)
+
+B. [Objectives](https://github.com/IBM/cassandra-sample#Objectives)
+
+C. Cassandra Cluster
+
+1. [Create a Cassandra Headless Service](https://github.com/IBM/cassandra-sample#1-create-a-cassandra-headless-service)
+2. [Create a Replication Controller](https://github.com/IBM/cassandra-sample#2-create-a-replication-controller)
+3. [Validate the Replication Controller](https://github.com/IBM/cassandra-sample#3-validate-the-replication-controller)
+4. [Scale the Replication Controller](https://github.com/IBM/cassandra-sample#4-scale-the-replication-controller)
+5. [Using CQL](https://github.com/IBM/cassandra-sample#5-using-cql)
 
 ## Prerequisites
 

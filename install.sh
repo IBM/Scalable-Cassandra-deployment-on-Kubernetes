@@ -15,5 +15,5 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 echo "kubectl installed!"
 $(bx cs cluster-config test-cassandra | grep -v "Downloading" | grep -v "OK" | grep -v "The")
-kubectl create cassandra-service.yaml
-kubectl create cassandra-controller.yaml
+kubectl create -f cassandra-service.yaml
+kubectl create -f cassandra-controller.yaml

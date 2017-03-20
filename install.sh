@@ -15,5 +15,8 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 echo "kubectl installed!"
 $(bx cs cluster-config test-cassandra | grep -v "Downloading" | grep -v "OK" | grep -v "The")
-kubectl create -f cassandra-service.yaml
-kubectl create -f cassandra-controller.yaml
+git clone https://github.com/IBM/cassandra-sample
+cd cassandra-sample
+echo "inside the cassandra-sample folder"
+bx cs cluster-create --name "cassandra-demo"
+bx cs workers cassandra-demo

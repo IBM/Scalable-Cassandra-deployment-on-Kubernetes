@@ -23,8 +23,6 @@ sleep 5m
 echo "slept for 5m"
 sleep 5m
 echo "slept for 10m"
-sleep 5m
-echo "slept for 15m"
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
 kubectl create -f cassandra-service.yaml

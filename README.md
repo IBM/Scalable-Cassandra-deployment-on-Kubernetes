@@ -32,7 +32,7 @@ C. Cassandra Cluster
 * **CREATE** a cluster with IBM Bluemix Container Service.
 
 	```bash
-	$ bx cs cluster-create my-cassandra-cluster
+	$ bx cs cluster-create --name my-cassandra-cluster
 	```
 	* You can replace "my-cassandra-cluster" with any name you want for your cluster.
 	It may take a while to fully deploy the cluster. You can check by executing this command:
@@ -49,7 +49,7 @@ C. Cassandra Cluster
     Downloading cluster config for my-cassandra-cluster
     OK
     The configuration for my-cassandra-cluster was downloaded successfully. Export environment variables to start using Kubernetes.
-    
+
     export KUBECONFIG=/Users/.../.../...
     ```
     * **COPY** the last line and execute it in the terminal you are using.
@@ -57,7 +57,7 @@ C. Cassandra Cluster
     $ export KUBECONFIG=/Users/.../.../...
     ```
     > You'll need to use this command everytime you use a new terminal session.
-    
+
     * To view your **Kubernetes Dashboard**, you need to run this command
     ```bash
     $ kubectl proxy &

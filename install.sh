@@ -1,9 +1,13 @@
 #!/bin/sh
 
 curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -zx
-mv cf /usr/local/bin
-curl -o /usr/share/bash-completion/completions/cf https://raw.githubusercontent.com/cloudfoundry/cli/master/ci/installers/completion/cf
+sudo mv cf /usr/local/bin
+sudo curl -o /usr/share/bash-completion/completions/cf https://raw.githubusercontent.com/cloudfoundry/cli/master/ci/installers/completion/cf
 cf --version
+curl -L public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.5.1_amd64.tar.gz > Bluemix_CLI.tar.gz
 tar -xvf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
-./install_bluemix_cli
+sudo ./install_bluemix_cli
+bx plugin repo-add stage https://plugins.stage1.ng.bluemix.net
+bx plugin install cs -r stage
+bx login -a https://api.ng.bluemix.net

@@ -8,3 +8,6 @@ curl -L public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.5.1_amd64
 tar -xvf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
 sudo ./install_bluemix_cli
+bx plugin repo-add stage https://plugins.stage1.ng.bluemix.net
+bx plugin install cs -r stage
+bx login -a https://api.ng.bluemix.net

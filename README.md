@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/IBM/cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/cassandra-sample)
+
 # Container Service Cassandra Sample
 
 This tutorial demonstrates the deployment of Cassandra on Kubernetes. With IBM® Bluemix® Container Service, you can deploy and manage your own Kubernetes cluster in the cloud that lets you automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts called worker nodes.
@@ -317,5 +319,3 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       2 |      SJC |    Robin | 9848022339 |   40000
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
-
-[![Build Status](https://travis-ci.org/IBM/cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/cassandra-sample)

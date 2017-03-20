@@ -2,12 +2,63 @@
 
 This tutorial demonstrates the deployment of Cassandra on Kubernetes. With IBM® Bluemix® Container Service, you can deploy and manage your own Kubernetes cluster in the cloud that lets you automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts called worker nodes.
 
+## Audience
 
-## Prerequisite
+This tutorial is intended for software developers who have never deployed an application on Kubernetes cluster before.
 
-* Create a Kubernetes cluster with IBM Bluemix Container Service.
+## Table of Contents
 
-	* If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-service-wordpress-sample/blob/master/creating-a-kubernetes-cluster.md) tutorial.
+### A. [Prerequisites](https://github.com/IBM/cassandra-sample#Prerequisite)
+### B. [Objectives](https://github.com/IBM/cassandra-sample#Objectives)
+### 1. [Create a Cassandra Headless Service](https://github.com/IBM/cassandra-sample#1-create-a-cassandra-headless-service)
+### 2. [Create a Replication Controller](https://github.com/IBM/cassandra-sample#2-create-a-replication-controller)
+### 3. [Validate the Replication Controller](https://github.com/IBM/cassandra-sample#3-validate-the-replication-controller)
+### 4. [Scale the Replication Controller](https://github.com/IBM/cassandra-sample#4-scale-the-replication-controller)
+### 5. [Using CQL](https://github.com/IBM/cassandra-sample#5-using-cql)
+
+## Prerequisites
+
+* Install [Bluemix CLI](http://clis.ng.bluemix.net/ui/home.html) and [Kubernetes' kubectl](https://kubernetes.io/docs/user-guide/prereqs/)
+* Install **IBM Bluemix Container Service plug-in (bx cs).** *You may need to login to your Bluemix Account*
+	```bash
+    bx plugin install container-service -r Bluemix
+    ```
+* **CREATE** a cluster with IBM Bluemix Container Service.
+
+	```bash
+	$ bx cs cluster-create my-cassandra-cluster
+	```
+	* You can replace "my-cassandra-cluster" with any name you want for your cluster.
+	It may take a while to fully deploy the cluster. You can check by executing this command:
+	```bash
+	$ bx cs workers my-cassandra-cluster
+	Listing cluster workers...
+	OK
+	ID           Public IP      Private IP    Machine Type   State      Status   
+	kube-xx...   169.xx.xx.xx   10.xx.xx.xx   free           deployed   Deploy Automation Successful
+	```
+    * After the cluster is deployed and ready for use, you should **EXPORT** the config of the cluster to use kubectl with it.
+    ```bash
+    $ bx cs cluster-config my-cassandra-cluster
+    Downloading cluster config for my-cassandra-cluster
+    OK
+    The configuration for my-cassandra-cluster was downloaded successfully. Export environment variables to start using Kubernetes.
+    
+    export KUBECONFIG=/Users/.../.../...
+    ```
+    * **COPY** the last line and execute it in the terminal you are using.
+    ```bash
+    $ export KUBECONFIG=/Users/.../.../...
+    ```
+    > You'll need to use this command everytime you use a new terminal session.
+    
+    * To view your **Kubernetes Dashboard**, you need to run this command
+    ```bash
+    $ kubectl proxy &
+    or
+    $ kubectl proxy --port=<insert port number here> &
+    ```
+    > The "&" will make the proxy run in the background and "kubectl proxy" defaults to port 8001 or you can spefcify the port you want by using --port argument. You can access the ui through [http://localhost:8001/ui](http://localhost:8001/ui) or replace the port number to the one you set.
 
 * Clone this repository for the necessary files and go inside the directory
 
@@ -23,10 +74,6 @@ This scenario provides instructions for the following tasks:
 - Create a replication controller to create Cassandra node pods
 - Validate and Scale the replication controller
 - Use Cassandra Query Language
-
-## Audience
-
-This tutorial is intended for software developers who have never deployed an application on Kubernetes cluster before.
 
 # 1. Create a Cassandra Headless Service
 For now, you don't need any load-balancing or proxying done in this sample app. For a "headless" service, a cluster IP is not allocated and there is no load-balancing or proxying done. You can create a headless service by specifying **none** in **clusterIP** spec. Here is the Service description for the headless Service:

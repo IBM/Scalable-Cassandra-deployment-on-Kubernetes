@@ -1,2 +1,4 @@
 language: bash
 script: true
+before_install:
+- bash install.sh

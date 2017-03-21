@@ -1,4 +1,3 @@
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM/cassandra-sample.git) (Pipeline)
 
 [![Build Status](https://travis-ci.org/IBM/cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/cassandra-sample)
 

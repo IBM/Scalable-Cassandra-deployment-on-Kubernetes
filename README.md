@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/IBM/kubernetes-container-cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-cassandra-sample)
+[![Build Status](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-sample)
 
 # Container Service Cassandra Sample
 

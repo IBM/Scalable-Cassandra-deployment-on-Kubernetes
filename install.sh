@@ -14,8 +14,8 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 echo "kubectl installed!"
-git clone https://github.com/IBM/cassandra-sample
-cd cassandra-sample
+git clone https://github.com/IBM/kubernetes-container-service-cassandra-deployment.git
+cd kubernetes-container-service-cassandra-deployment
 echo "inside the cassandra-sample folder"
 bx cs cluster-rm cassandra-demo
 bx cs cluster-create --name "cassandra-demo"

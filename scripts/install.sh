@@ -9,7 +9,7 @@ tar -xvf Bluemix_CLI.tar.gz
 cd Bluemix_CLI
 sudo ./install_bluemix_cli
 bx plugin install container-service -r Bluemix
-bx login -a https://api.ng.bluemix.net -u $BLUEMIX_USER -p $BLUEMIX_PASS
+echo "1" | bx login -a https://api.ng.bluemix.net -u $BLUEMIX_USER -p $BLUEMIX_PASS
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
@@ -17,7 +17,7 @@ echo "kubectl installed!"
 git clone https://github.com/IBM/kubernetes-container-service-cassandra-deployment.git
 cd kubernetes-container-service-cassandra-deployment
 echo "inside the cassandra-sample folder"
-bx cs cluster-rm cassandra-demo
+echo "Y" | bx cs cluster-rm cassandra-demo
 bx cs cluster-create --name "cassandra-demo"
 sleep 5m
 echo "slept for 5m"

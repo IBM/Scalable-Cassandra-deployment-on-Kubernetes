@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-sample.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-sample)
+[![Build Status](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment)
 
 # Scalable multi-node Cassandra cluster on Bluemix Container Service using Kubernetes
 

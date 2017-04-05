@@ -44,7 +44,7 @@ function check_clustersetup() {
 
 function kubectl_config() {
 	echo "Installing and configuring kubectl"
-	KUBECONFIG=$(bx cs cluster-config k8stest | awk  -F = '{print $2}' | tr -d '[:space:]')
+	KUBECONFIG=$(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
 	export KUBECONFIG
 }
 

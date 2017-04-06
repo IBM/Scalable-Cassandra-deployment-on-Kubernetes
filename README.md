@@ -24,11 +24,11 @@ This scenario provides instructions for the following tasks:
 
 ## Steps
 
-1. [Create a Cassandra Headless Service](https://github.com/IBM/cassandra-sample#1-create-a-cassandra-headless-service)
-2. [Create a Replication Controller](https://github.com/IBM/cassandra-sample#2-create-a-replication-controller)
-3. [Validate the Replication Controller](https://github.com/IBM/cassandra-sample#3-validate-the-replication-controller)
-4. [Scale the Replication Controller](https://github.com/IBM/cassandra-sample#4-scale-the-replication-controller)
-5. [Using CQL](https://github.com/IBM/cassandra-sample#5-using-cql)
+1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
+2. [Create a Replication Controller](#2-create-a-replication-controller)
+3. [Validate the Replication Controller](#3-validate-the-replication-controller)
+4. [Scale the Replication Controller](#4-scale-the-replication-controller)
+5. [Using CQL](#5-using-cql)
 
 
 # 1. Create a Cassandra Headless Service

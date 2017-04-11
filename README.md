@@ -7,6 +7,13 @@ This project demonstrates the deployment of a multi-node scalable Cassandra clus
 
 With IBM Bluemix Container Service, you can deploy and manage your own Kubernetes cluster in the cloud that lets you automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts called worker nodes.  We can then leverage Bluemix Container Service using Kubernetes to deploy scalable Cassandra cluster.
 
+![kube-cassandra](images/kube-cassandra.png)
+
+## Included Components
+- Bluemix container service
+- Kubernetes
+- Cassandra
+
 ## Prerequisite
 
 Create a Kubernetes cluster with IBM Bluemix Container Service.

@@ -39,15 +39,7 @@ spec:
               value: Rack1
             - name: CASSANDRA_ENDPOINT_SNITCH
               value: GossipingPropertyFileSnitch
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-          image: docker.io/anthonyamanse/cassandra-demo:1.0
+          image: anthonyamanse/cassandra-demo:3.0
           name: cassandra
           ports:
             - containerPort: 7000

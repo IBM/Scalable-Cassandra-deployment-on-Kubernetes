@@ -36,6 +36,12 @@ This scenario provides instructions for the following tasks:
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
 4. [Scale the Replication Controller](#4-scale-the-replication-controller)
 5. [Using CQL](#5-using-cql)
+To use Persistent Volumes for your Cassandra nodes, use StatefulSets.
+6. [Create Local Volumes](#6-create-local-volumes)
+7. [Create a StatefulSet](#7-create-a-statefulset)
+8. [Validate the StatefulSet](#8-validate-the-statefulset)
+9. [Scale the StatefulSet](#9-scale-the-statefulset)
+10. [Using CQL](#10-using-cql)
 
 
 # 1. Create a Cassandra Headless Service
@@ -328,6 +334,97 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       2 |      SJC |    Robin | 9848022339 |   40000
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
+
+# 6. Create Local Volumes
+Before proceeding to the next steps, delete your Cassandra Replication Controller.
+```bash
+$ kubectl delete rc cassandra
+```
+To maintain persistency in your Cassandra nodes, we need to provision Persistent Volumes.
+There are two ways to provision PV's: **statically and dynamically**. For **(1) Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** cluster.
+In this journey, you'll use **(2) Static** provisioning where you will have to create manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
+> Example: If you are expecting to have 4 Cassandra nodes, you'll need to create 4 Persistent Volumes
+
+The provided yaml file already has **4** Persistent Volumes defined. Configure them to add more if you expect to have greater than 4 Cassandra nodes.
+```bash
+$ kubectl create -f local-volumes.yaml
+```
+
+You will use the same service you created earlier.
+
+# 7. Create a StatefulSet
+
+The StatefulSet is the one responsible for creating the Pods. It has the features of ordered deployment, ordered termination and unique network names. You will start with a single Cassandra node using StatefulSet. Run the following command.
+```bash
+$ kubectl create -f cassandra-statefulset.yaml
+```
+# 8. Validate the StatefulSet
+
+You can check if your StatefulSet has deployed using the command below.
+```bash
+$ kubectl get statefulsets
+NAME        DESIRED   CURRENT   AGE
+cassandra   1         1         2h
+```
+If you view the list of the Pods, you should see 1 Pod running. Your Pod name should be cassandra-0 and the next pods would follow the ordinal number (*cassandra-1, cassandra-2,..*) Use this command to view the Pods created by the StatefulSet:
+
+```bash
+$ kubectl get pods -o wide
+NAME          READY     STATUS    RESTARTS   AGE       IP              NODE
+cassandra-0   1/1       Running   0          1m        172.xxx.xxx.xxx   169.xxx.xxx.xxx
+```
+
+To check if the Cassandra node is up, perform a **nodetool status:**
+
+```bash
+$ kubectl exec -ti cassandra-0 -- nodetool status
+Datacenter: DC1
+===============
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)   Host ID                               Rack
+UN  172.xxx.xxx.xxx  109.28 KB  256          100.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+```
+# 9. Scale the StatefulSet
+To increase or decrease the size of your StatefulSet, use this command:
+```bash
+$ kubectl edit statefulset cassandra
+```
+You should be redirected to and editor in your terminal. You need to edit the line where it says `replicas: 1` and change it to `replicas: 4` Save it and the StatefulSet should now have 4 Pods
+After scaling, you should see that your desired number has increased.
+```bash
+$ kubectl get rc
+NAME        DESIRED   CURRENT   AGE
+cassandra   4         4         2h
+```
+If you watch the Cassandra pods deploy, they should be created sequentially.
+
+You can view the list of the Pods again to confirm that your Pods are up and running.
+```bash
+$ kubectl get pods -o wide
+NAME          READY     STATUS    RESTARTS   AGE       IP                NODE
+cassandra-0   1/1       Running   0          13m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
+cassandra-1   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
+cassandra-2   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
+cassandra-3   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
+```
+You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster. **Substitute the Pod name to the one you have:**
+```bash
+$ kubectl exec -ti cassandra-0 -- nodetool status
+Datacenter: DC1
+===============
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  172.xxx.xxx.xxx  109.28 KB  256          75.4%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+UN  172.xxx.xxx.xxx  196.04 KB  256          74.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
+UN  172.xxx.xxx.xxx  114.44 KB  256          78.0%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
+UN  172.xxx.xxx.xxx  79.83 KB   256          72.3%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
+```
+
+
+# 10. Using CQL
+You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster deployed with StatefulSet.
 
 ## License
 

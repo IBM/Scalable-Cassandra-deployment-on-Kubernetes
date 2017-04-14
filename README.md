@@ -24,12 +24,15 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 This scenario provides instructions for the following tasks:
 
-- Use Replication Controller to create and scale Cassandra cluster node pods
-- Use StatefulSets to create and scale Cassandra cluster node pods
+- Use Kubernetes Service for Cassandra cluster formation and discovery
+- Use Kubernetes Replication Controller to create and scale Cassandra cluster node pods
+- Use Kubernetes StatefulSets to create and scale Cassandra cluster node pods
 - Use Cassandra Query Language to create and update Employee table on Cassandra keyspace
 
 
 ## Steps
+
+### Create a Cassandra Service for Cassandra cluster formation and discovery
 
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
 

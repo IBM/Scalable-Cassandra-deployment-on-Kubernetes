@@ -31,12 +31,16 @@ This scenario provides instructions for the following tasks:
 
 ## Steps
 
+### Using Replication Controller to create non=persistent Caasandra cluster
+
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
 4. [Scale the Replication Controller](#4-scale-the-replication-controller)
 5. [Using CQL](#5-using-cql)
-To use Persistent Volumes for your Cassandra nodes, use StatefulSets.
+
+### Using StatefulSets to create persistent Cassandra cluster
+
 6. [Create Local Volumes](#6-create-local-volumes)
 7. [Create a StatefulSet](#7-create-a-statefulset)
 8. [Validate the StatefulSet](#8-validate-the-statefulset)
@@ -340,9 +344,10 @@ Before proceeding to the next steps, delete your Cassandra Replication Controlle
 ```bash
 $ kubectl delete rc cassandra
 ```
-To maintain persistency in your Cassandra nodes, we need to provision Persistent Volumes.
-There are two ways to provision PV's: **statically and dynamically**. For **(1) Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** cluster.
-In this journey, you'll use **(2) Static** provisioning where you will have to create manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
+To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**. 
+
+For **(1) Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** cluster.
+In this journey, we will use **(2) Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
 > Example: If you are expecting to have 4 Cassandra nodes, you'll need to create 4 Persistent Volumes
 
 The provided yaml file already has **4** Persistent Volumes defined. Configure them to add more if you expect to have greater than 4 Cassandra nodes.

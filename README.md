@@ -10,17 +10,12 @@ With IBM Bluemix Container Service, you can deploy and manage your own Kubernete
 ![kube-cassandra](images/kube-cassandra.png)
 
 ## Included Components
-- Bluemix container service
-- Kubernetes
-- Cassandra
+[Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+[Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+[DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+[Cassandra](http://cassandra.apache.org/)
 
-## Prerequisite
-
-Create a Kubernetes cluster with IBM Bluemix Container Service.
-
-If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-journey-template) tutorial.
-
-## Components Used
+## Kubernetes Components Used
 
 [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
 
@@ -30,7 +25,13 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
-[DevOps Toolchain Service from Bluemix](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+
+## Prerequisite
+
+Create a Kubernetes cluster with IBM Bluemix Container Service.
+
+If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-journey-template) tutorial.
+
 
 
 ## Steps

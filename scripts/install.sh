@@ -24,15 +24,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 }
 
 function cluster_setup() {
-echo "Y" | bx cs cluster-rm cassandra-demo
-bx cs cluster-create --name "cassandra-demo"
-for i in `seq 1 6`;
-do
-check_clustersetup
-done
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
-kubectl get pods
+kubectl delete --ignore-not-found=true -f .
 }
 
 function check_clustersetup() {

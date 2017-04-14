@@ -31,15 +31,16 @@ This scenario provides instructions for the following tasks:
 
 ## Steps
 
-### Using Replication Controller to create non-persistent Caasandra cluster
-
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
+
+### Use Replication Controller to create non-persistent Caasandra cluster
+
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
 4. [Scale the Replication Controller](#4-scale-the-replication-controller)
 5. [Using CQL](#5-using-cql)
 
-### Using StatefulSets to create persistent Cassandra cluster
+### Use StatefulSets to create persistent Cassandra cluster
 
 6. [Create Local Volumes](#6-create-local-volumes)
 7. [Create a StatefulSet](#7-create-a-statefulset)

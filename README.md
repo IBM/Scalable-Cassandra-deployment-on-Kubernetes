@@ -10,9 +10,17 @@ With IBM Bluemix Container Service, you can deploy and manage your own Kubernete
 ![kube-cassandra](images/kube-cassandra.png)
 
 ## Included Components
-- Bluemix container service
-- Kubernetes
-- Cassandra
+- [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+- [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+- [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+- [Cassandra](http://cassandra.apache.org/)
+
+## Kubernetes Concepts Used
+
+- [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
+- [Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
+- [Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
+- [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## Prerequisite
 
@@ -20,14 +28,6 @@ Create a Kubernetes cluster with IBM Bluemix Container Service.
 
 If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-journey-template) tutorial.
 
-## Objectives
-
-This scenario provides instructions for the following tasks:
-
-- Use Kubernetes Service for Cassandra cluster formation and discovery
-- Use Kubernetes Replication Controller to create and scale Cassandra cluster node pods
-- Use Kubernetes StatefulSets to create and scale Cassandra cluster node pods
-- Use Cassandra Query Language to create and update Employee table on Cassandra keyspace
 
 
 ## Steps
@@ -41,7 +41,7 @@ This scenario provides instructions for the following tasks:
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
 4. [Scale the Replication Controller](#4-scale-the-replication-controller)
-5. [Using CQL](#5-using-cql)
+5. [Using Cassandra Query Language (CQL)](#5-using-cql)
 
 ### Use StatefulSets to create persistent Cassandra cluster
 
@@ -49,7 +49,7 @@ This scenario provides instructions for the following tasks:
 7. [Create a StatefulSet](#7-create-a-statefulset)
 8. [Validate the StatefulSet](#8-validate-the-statefulset)
 9. [Scale the StatefulSet](#9-scale-the-statefulset)
-10. [Using CQL](#10-using-cql)
+10. [Using assandra Query Language(CQL)](#10-using-cql)
 
 
 # 1. Create a Cassandra Headless Service

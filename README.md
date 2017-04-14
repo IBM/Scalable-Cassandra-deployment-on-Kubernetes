@@ -352,6 +352,8 @@ $ kubectl delete rc cassandra
 
 # 6. Create Local Volumes
 
+If you have not done it before, please [create a Cassandra Headless Service](#1-create-a-cassandra-headless-service) before moving forward.
+
 To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**. 
 
 For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**

@@ -24,19 +24,27 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 This scenario provides instructions for the following tasks:
 
-- Create a replication controller to create Cassandra node pods
-- Validate and Scale the replication controller
-- Use Cassandra Query Language
+- Use Kubernetes Service for Cassandra cluster formation and discovery
+- Use Kubernetes Replication Controller to create and scale Cassandra cluster node pods
+- Use Kubernetes StatefulSets to create and scale Cassandra cluster node pods
+- Use Cassandra Query Language to create and update Employee table on Cassandra keyspace
 
 
 ## Steps
 
+### Create a Cassandra Service for Cassandra cluster formation and discovery
+
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
+
+### Use Replication Controller to create non-persistent Caasandra cluster
+
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
 4. [Scale the Replication Controller](#4-scale-the-replication-controller)
 5. [Using CQL](#5-using-cql)
-> To use Persistent Volumes for your Cassandra nodes, use StatefulSets.
+
+### Use StatefulSets to create persistent Cassandra cluster
+
 6. [Create Local Volumes](#6-create-local-volumes)
 7. [Create a StatefulSet](#7-create-a-statefulset)
 8. [Validate the StatefulSet](#8-validate-the-statefulset)
@@ -66,6 +74,9 @@ You can create the headless service using the provided yaml file:
 $ kubectl create -f cassandra-service.yaml
 service "cassandra" created
 ```
+
+If you want to create persistent Cassandra cluster using StatefulSets, please jump to [Step 6](#6-create-local-volumes)
+
 # 2. Create a Replication Controller
 The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. You can set how much resources will be used for each pod inside the template and limit the resources they can use. Here is the Replication Controller description:
 ```yaml
@@ -335,14 +346,21 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
 
-# 6. Create Local Volumes
-Before proceeding to the next steps, delete your Cassandra Replication Controller.
+You have you non-persistent Caasandra cluster ready!!
+
+If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.
+
 ```bash
 $ kubectl delete rc cassandra
 ```
-To maintain persistency in your Cassandra nodes, we need to provision Persistent Volumes.
-There are two ways to provision PV's: **statically and dynamically**. For **(1) Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** cluster.
-In this journey, you'll use **(2) Static** provisioning where you will have to create manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
+
+# 6. Create Local Volumes
+
+If you have not done it before, please [create a Cassandra Headless Service](#1-create-a-cassandra-headless-service) before moving forward.
+
+To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**. 
+
+For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
 > Example: If you are expecting to have 4 Cassandra nodes, you'll need to create 4 Persistent Volumes
 
 The provided yaml file already has **4** Persistent Volumes defined. Configure them to add more if you expect to have greater than 4 Cassandra nodes.

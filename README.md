@@ -11,11 +11,14 @@ With IBM Bluemix Container Service, you can deploy and manage your own Kubernete
 
 ## Included Components
 [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+
 [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+
 [DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+
 [Cassandra](http://cassandra.apache.org/)
 
-## Kubernetes Components Used
+## Kubernetes Concepts Used
 
 [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
 

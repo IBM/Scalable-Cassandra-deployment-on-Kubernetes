@@ -24,8 +24,8 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 This scenario provides instructions for the following tasks:
 
-- Create a Replication Controller to create and scale Cassandra cluster node pods
-- Create StatefulSets to create and scale Cassandra cluster node pods
+- Use Replication Controller to create and scale Cassandra cluster node pods
+- Use StatefulSets to create and scale Cassandra cluster node pods
 - Use Cassandra Query Language to create and update Employee table on Cassandra keyspace
 
 
@@ -70,6 +70,9 @@ You can create the headless service using the provided yaml file:
 $ kubectl create -f cassandra-service.yaml
 service "cassandra" created
 ```
+
+If you want to create persistent Cassandra cluster using StatefulSets, please jump to [Step 6](#6-create-local-volumes)
+
 # 2. Create a Replication Controller
 The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. You can set how much resources will be used for each pod inside the template and limit the resources they can use. Here is the Replication Controller description:
 ```yaml
@@ -339,11 +342,16 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
 
-# 6. Create Local Volumes
-Before proceeding to the next steps, delete your Cassandra Replication Controller.
+You have you non-persistent Caasandra cluster ready!!
+
+If you want to reate persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.
+
 ```bash
 $ kubectl delete rc cassandra
 ```
+
+# 6. Create Local Volumes
+
 To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**. 
 
 For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**

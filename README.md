@@ -344,7 +344,7 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
 
 You have you non-persistent Caasandra cluster ready!!
 
-If you want to reate persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.
+If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.
 
 ```bash
 $ kubectl delete rc cassandra

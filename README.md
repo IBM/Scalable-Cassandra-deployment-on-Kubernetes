@@ -24,9 +24,9 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 This scenario provides instructions for the following tasks:
 
-- Create a replication controller to create Cassandra node pods
-- Validate and Scale the replication controller
-- Use Cassandra Query Language
+- Create a Replication Controller to create and scale Cassandra cluster node pods
+- Create StatefulSets to create and scale Cassandra cluster node pods
+- Use Cassandra Query Language to create and update Employee table on Cassandra keyspace
 
 
 ## Steps

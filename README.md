@@ -53,7 +53,7 @@ This scenario provides instructions for the following tasks:
 
 
 # 1. Create a Cassandra Headless Service
-In this sample app you don’t need load-balancing and a single service IP. In this case, you can create “headless” service by specifying **none** for the  **clusterIP**.
+In this sample app you don’t need load-balancing and a single service IP. In this case, you can create “headless” service by specifying **none** for the  **clusterIP**. We'll need the headless service for the Pods to discover the IP address of the Cassandra seed.
 Here is the Service description for the headless Service:
 ```yaml
 apiVersion: v1

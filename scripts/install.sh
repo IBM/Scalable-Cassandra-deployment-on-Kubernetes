@@ -26,7 +26,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 function cluster_setup() {
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
-kubectl delete --ignore-not-found=true -f .
+kubectl delete --ignore-not-found=true -f cassandra-service.yaml
+kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
+kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
 kubectl get svc
 kubectl get pods
 }

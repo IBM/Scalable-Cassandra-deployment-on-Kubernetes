@@ -27,6 +27,8 @@ function cluster_setup() {
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
 kubectl delete --ignore-not-found=true -f .
+kubectl get svc
+kubectl get pods
 }
 
 function check_clustersetup() {

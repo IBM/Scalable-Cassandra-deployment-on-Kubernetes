@@ -10,17 +10,17 @@ With IBM Bluemix Container Service, you can deploy and manage your own Kubernete
 ![kube-cassandra](images/kube-cassandra.png)
 
 ## Included Components
-1. [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
-2. [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
-3. [DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
-4. [Cassandra](http://cassandra.apache.org/)
+- [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+- [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+- [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+- [Cassandra](http://cassandra.apache.org/)
 
 ## Kubernetes Concepts Used
 
-1. [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
-2. [Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
-3. [Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
-4. [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+- [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
+- [Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
+- [Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
+- [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## Prerequisite
 

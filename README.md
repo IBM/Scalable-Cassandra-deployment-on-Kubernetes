@@ -51,7 +51,7 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 9. [Scale the StatefulSet](#9-scale-the-statefulset)
 10. [Using Cassandra Query Language(CQL)](#10-using-cql)
 
-#### [Troubleshooting](#troubleshooting)
+#### [Troubleshooting](#troubleshooting-1)
 
 
 # 1. Create a Cassandra Headless Service

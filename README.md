@@ -22,15 +22,15 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 ## Components Used
 
--[Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
+[Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
 
--[Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
+[Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
 
--[Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
+[Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
 
--[Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+[Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
--[DevOps Toolchain Service from Bluemix](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+[DevOps Toolchain Service from Bluemix](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
 
 
 ## Steps

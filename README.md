@@ -75,7 +75,7 @@ $ kubectl create -f cassandra-service.yaml
 service "cassandra" created
 ```
 
-If you want to create persistent Cassandra cluster using StatefulSets, please jump to [Step 6](#6-create-local-volumes)
+If you want to create a persistent Cassandra cluster using StatefulSets, please jump to [Step 6](#6-create-local-volumes)
 
 # 2. Create a Replication Controller
 The Replication Controller is the one responsible for creating or deleting pods to ensure the number of Pods match its defined number in "replicas". The Pods' template are defined inside the Replication Controller. You can set how much resources will be used for each pod inside the template and limit the resources they can use. Here is the Replication Controller description:
@@ -100,11 +100,7 @@ spec:
         app: cassandra
     spec:
       containers:
-        - resources:
-            limits:
-              cpu: "0.312"
-              memory: 250M
-          env:
+        - env:
             - name: CASSANDRA_SEED_DISCOVERY
               value: cassandra
             # CASSANDRA_SEED_DISCOVERY should match the name of the service in cassandra-service.yaml
@@ -121,15 +117,7 @@ spec:
               value: Rack1
             - name: CASSANDRA_ENDPOINT_SNITCH
               value: GossipingPropertyFileSnitch
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-          image: docker.io/anthonyamanse/cassandra-demo:1.0
+          image: docker.io/anthonyamanse/cassandra-demo:7.0
           name: cassandra
           ports:
             - containerPort: 7000
@@ -169,6 +157,7 @@ cassandra-xxxxx   1/1       Running   0          1m        172.xxx.xxx.xxx   169
 ```
 
 To check if the Cassandra node is up, perform a **nodetool status:**
+> You may not be able to run this command for some time if the Pod hasn't created the container yet or the Cassandra instance hasn't finished setting up.
 
 ```bash
 $ kubectl exec -ti cassandra-xxxxx -- nodetool status
@@ -212,10 +201,10 @@ Datacenter: DC1
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
-UN  172.xxx.xxx.xxx  109.28 KB  256          75.4%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
-UN  172.xxx.xxx.xxx  196.04 KB  256          74.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
-UN  172.xxx.xxx.xxx  114.44 KB  256          78.0%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
-UN  172.xxx.xxx.xxx  79.83 KB   256          72.3%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
+UN  172.xxx.xxx.xxx  109.28 KB  256          50.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+UN  172.xxx.xxx.xxx  196.04 KB  256          51.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
+UN  172.xxx.xxx.xxx  114.44 KB  256          46.2%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
+UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
 ```
 
 
@@ -272,9 +261,9 @@ subsets:
       protocol: TCP
 ```
 # 5. Using CQL
-> **Note:** It can take around 5-10 minutes for the Cassandra database to finish its setup. You may encounter an error if you did the following commands before the setup is complete.
+> **Note:** It can take around 5 minutes for the Cassandra database to finish its setup.
 
-You can check if the Cassandra in the Pod is up and running by using this command:
+You can check if the Cassandra nodes are up and running by using this command:
 **Substitute the Pod name to the one you have**
 ```bash
 $ kubectl exec cassandra-xxxxx -- nodetool status
@@ -283,12 +272,12 @@ Datacenter: DC1
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
-UN  172.xxx.xxx.xxx  109.28 KB  256          75.4%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
-UN  172.xxx.xxx.xxx  196.04 KB  256          74.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
-UN  172.xxx.xxx.xxx  114.44 KB  256          78.0%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
-UN  172.xxx.xxx.xxx  79.83 KB   256          72.3%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
+UN  172.xxx.xxx.xxx  109.28 KB  256          50.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+UN  172.xxx.xxx.xxx  196.04 KB  256          51.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
+UN  172.xxx.xxx.xxx  114.44 KB  256          46.2%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
+UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
 ```
-
+> You will need to wait for the status of the nodes to be Up and Normal (UN) to execute the commands in the next steps.
 
 
 You can access the cassandra container using the following command:
@@ -348,12 +337,11 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
 
 You have you non-persistent Caasandra cluster ready!!
 
-If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.
+**If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.**
 
 ```bash
 $ kubectl delete rc cassandra
 ```
-
 # 6. Create Local Volumes
 
 If you have not done it before, please [create a Cassandra Headless Service](#1-create-a-cassandra-headless-service) before moving forward.
@@ -371,6 +359,7 @@ $ kubectl create -f local-volumes.yaml
 You will use the same service you created earlier.
 
 # 7. Create a StatefulSet
+> Make sure you have deleted your Replication Controller if it is still running. `kubectl delete rc cassandra`
 
 The StatefulSet is the one responsible for creating the Pods. It has the features of ordered deployment, ordered termination and unique network names. You will start with a single Cassandra node using StatefulSet. Run the following command.
 ```bash
@@ -411,7 +400,7 @@ $ kubectl edit statefulset cassandra
 You should be redirected to and editor in your terminal. You need to edit the line where it says `replicas: 1` and change it to `replicas: 4` Save it and the StatefulSet should now have 4 Pods
 After scaling, you should see that your desired number has increased.
 ```bash
-$ kubectl get rc
+$ kubectl get statefulsets
 NAME        DESIRED   CURRENT   AGE
 cassandra   4         4         2h
 ```
@@ -434,15 +423,21 @@ Datacenter: DC1
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
-UN  172.xxx.xxx.xxx  109.28 KB  256          75.4%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
-UN  172.xxx.xxx.xxx  196.04 KB  256          74.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
-UN  172.xxx.xxx.xxx  114.44 KB  256          78.0%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
-UN  172.xxx.xxx.xxx  79.83 KB   256          72.3%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
+UN  172.xxx.xxx.xxx  109.28 KB  256          50.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+UN  172.xxx.xxx.xxx  196.04 KB  256          51.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
+UN  172.xxx.xxx.xxx  114.44 KB  256          46.2%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
+UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
 ```
 
 
 # 10. Using CQL
 You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster deployed with StatefulSet.
+
+## Troubleshooting
+
+* If your Cassandra instance is not running properly, you may check the logs using `kubectl logs <your-pod-name>`
+* To clean/delete your data on your Persistent Volumes, delete your PVCs using `kubectl delete pvc --all`
+* If your Cassandra nodes are not joining, delete your controller/statefulset then delete your Cassandra service. `kubectl delete <rc or statefulsets> cassandra` `kubectl delete svc cassandra`
 
 ## License
 

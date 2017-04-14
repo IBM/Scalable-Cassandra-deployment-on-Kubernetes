@@ -35,7 +35,7 @@ spec:
               value: Rack1
             - name: CASSANDRA_ENDPOINT_SNITCH
               value: GossipingPropertyFileSnitch
-          image: anthonyamanse/cassandra-demo:5.0
+          image: anthonyamanse/cassandra-demo:7.0
           name: cassandra
           ports:
             - containerPort: 7000

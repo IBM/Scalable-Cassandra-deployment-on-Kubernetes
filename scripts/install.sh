@@ -25,7 +25,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 function cluster_setup() {
 bx cs workers cassandra-demo
-$(bx cs cluster-config cassandra-demo | grep -v "Downloading" | grep -v "OK" | grep -v "The")
+$(bx cs cluster-config cassandra-demo | grep export)
+git clone https://github.com/IBM/kubernetes-container-service-cassandra-deployment.git
+cd kubernetes-container-service-cassandra-deployment
 kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
@@ -33,16 +35,9 @@ kubectl get svc
 kubectl get pods
 }
 
-function check_clustersetup() {
-#statements
-echo "sleeping for 5m"
-sleep 5m
-}
-
 function run_tests() {
 echo "Running tests"
-git clone https://github.com/IBM/kubernetes-container-service-cassandra-deployment.git
-cd kubernetes-container-service-cassandra-deployment
+
 kubectl create -f cassandra-service.yaml
 kubectl create -f cassandra-controller.yaml
 

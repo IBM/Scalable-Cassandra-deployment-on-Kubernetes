@@ -29,7 +29,7 @@ fi
 echo -e "Creating headless service"
 kubectl create -f cassandra-service.yaml
 
-echo -e "Creating StatefulSet"
+echo -e "Creating Replication Controller"
 kubectl create -f cassandra-controller.yaml
 
 sleep 15s
@@ -37,11 +37,12 @@ STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') --
 
 while [ ${#STATUS} -eq 0 ]
 do
-    echo $STATUS
+    echo "Waiting for Cassandra to finish setting up..."
     sleep 15s
     STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status | grep UN)
 done
 
+kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status
 kubectl scale rc cassandra --replicas=4
 
 sleep 2m
@@ -50,7 +51,8 @@ TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | hea
 
 while [ ${#TEST} -gt 10 ]
 do
-    echo $(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status)
+    kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
+    echo ${#TEST}
     sleep 15s
     TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 done

@@ -29,7 +29,7 @@ fi
 echo -e "Creating headless service"
 kubectl create -f cassandra-service.yaml
 
-echo -e "Creating StatefulSet"
+echo -e "Creating Replication Controller"
 kubectl create -f cassandra-controller.yaml
 
 sleep 15s

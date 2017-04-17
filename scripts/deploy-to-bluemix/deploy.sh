@@ -23,13 +23,13 @@ kubectl delete --ignore-not-found=true -f local-volumes.yaml
 
 kuber=$(kubectl get pods -l app=cassandra)
 if [ ${#kuber} -ne 0 ]; then
-	sleep 120s
+	sleep 60s
 fi
 
-echo -e "Creating headless service"
+echo -e "Creating headless service..."
 kubectl create -f cassandra-service.yaml
 
-echo -e "Creating Replication Controller"
+echo -e "Creating Replication Controller..."
 kubectl create -f cassandra-controller.yaml
 
 sleep 30s
@@ -52,17 +52,18 @@ TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | hea
 while [ "${#TEST}" != "11" ]
 do
     kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
-    echo ${#TEST}
+    # echo ${#TEST}
+    echo "Waiting for all Cassandra nodes to join and set up."
     sleep 15s
     TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 done
 
 echo "Your cassandra cluster is now up and normal"
-echo $(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status)
+kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
 
 
 echo "You can also view your Cassandra cluster on your machine"
 echo "Export your cluster configuration on your terminal:"
-echo "$(bx cs cluster-config <your-cluster-name> | grep export)"
+echo "bx cs cluster-config <your-cluster-name> then copy the export line."
 echo "Check the status of your Cassandra nodes"
-echo "kubecl exec cassandra-0 -- nodetool status"
+echo "kubectl exec <pod-name> -- nodetool status"

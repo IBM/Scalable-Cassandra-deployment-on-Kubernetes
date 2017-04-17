@@ -32,13 +32,13 @@ kubectl create -f cassandra-service.yaml
 echo -e "Creating Replication Controller"
 kubectl create -f cassandra-controller.yaml
 
-sleep 15s
+sleep 30s
 STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status | grep UN)
 
 while [ ${#STATUS} -eq 0 ]
 do
     echo "Waiting for Cassandra to finish setting up..."
-    sleep 15s
+    sleep 30s
     STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status | grep UN)
 done
 
@@ -49,10 +49,10 @@ sleep 15s
 
 TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 
-while [ "${TEST}" != "UN UN UN UN" ]
+while [ "${#TEST}" != "11" ]
 do
     kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
-    echo ${TEST}
+    echo ${#TEST}
     sleep 15s
     TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 done

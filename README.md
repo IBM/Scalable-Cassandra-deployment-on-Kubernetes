@@ -43,7 +43,7 @@ Please follow the [Toolchain instructions](#toolchain-instructions) to complete 
 
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
 
-### Use Replication Controller to create non-persistent Caasandra cluster
+### Use Replication Controller to create non-persistent Cassandra cluster
 
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
@@ -298,6 +298,8 @@ bin  boot  dev	docker-entrypoint.sh  etc  home  initial-seed.cql  lib	lib64  med
 ```
 
 Now run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
+> You only need to run the .cql file **once** in **ONE** Cassandra node. The other pods should also have access to the sample table created by the .cql file.
+
 ```bash
 root@cassandra-xxxxx:/# cqlsh -f initial-seed.cql
 root@cassandra-xxxxx:/# cqlsh
@@ -344,7 +346,7 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
 
-You have you non-persistent Caasandra cluster ready!!
+You now have a non-persistent Caasandra cluster ready!!
 
 **If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.**
 

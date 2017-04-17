@@ -45,20 +45,11 @@ git clone https://github.com/IBM/kubernetes-container-service-cassandra-deployme
 cd kubernetes-container-service-cassandra-deployment
 kubectl create -f cassandra-service.yaml
 kubectl create -f cassandra-controller.yaml
-echo "HEADLESS SERVICE and REPLICATION CONTROLLER CREATED!"
 
 }
-
-function exit_tests() {
-kubectl delete -f cassandra-service.yaml
-kubectl delete -f cassandra-controller.yaml
-echo "HEADLESS SERVICE and REPLICATION CONTROLLER DELETED!"
-}
-
 
 install_bluemix_cli
 bluemix_auth
 cluster_setup
 run_tests
-#exit_tests
 

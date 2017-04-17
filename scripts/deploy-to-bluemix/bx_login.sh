@@ -14,7 +14,7 @@ if [ -z "$BLUEMIX_USER" ] || [ -z "$BLUEMIX_PASSWORD" ] || [ -z "$BLUEMIX_ACCOUN
         echo "Define all required environment variables and rerun the stage."
         exit 1
     else
-        echo "Logging in using API_KEY"
+        echo "Logging in using API_KEY environment variable"
     fi
 fi
 echo "Deploy pods"

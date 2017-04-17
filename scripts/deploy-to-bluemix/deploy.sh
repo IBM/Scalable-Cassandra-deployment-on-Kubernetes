@@ -54,6 +54,7 @@ do
     kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
     # echo ${#TEST}
     echo "Waiting for all Cassandra nodes to join and set up."
+
     sleep 15s
     TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 done

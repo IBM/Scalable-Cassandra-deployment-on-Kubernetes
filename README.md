@@ -448,7 +448,7 @@ You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster dep
 
 > Note: This toolchain instruction is based on this [tutorial](https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines).
 
-1. Click the Create [toolchain button](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-scalable-wordpress-deployment) to fork the repo into your GitHub account.
+1. Click the Create [toolchain button](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment) to fork the repo into your GitHub account.
 
 2. If you have not authenticated to GitHub you will see an Authorize button.
 

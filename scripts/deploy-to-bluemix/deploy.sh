@@ -45,11 +45,11 @@ done
 kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status
 kubectl scale rc cassandra --replicas=4
 
-sleep 2m
+sleep 30s
 
 TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
 
-while [ ${#TEST} -gt 10 ]
+while [ "${#TEST}" != "UN UN UN UN" ]
 do
     kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
     echo ${#TEST}

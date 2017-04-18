@@ -31,7 +31,7 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 ## Deploy to Bluemix
 If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to Bluemix' button below to create a Bluemix DevOps service toolchain and pipeline for deploying the WordPress sample, else jump to [Steps](#steps)
 
-> You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemxi account.
+> You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
 [![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment)
 

@@ -426,7 +426,7 @@ cassandra-1   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx
 cassandra-2   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 cassandra-3   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 ```
-You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster. **Substitute the Pod name to the one you have:**
+You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster.
 ```bash
 $ kubectl exec -ti cassandra-0 -- nodetool status
 Datacenter: DC1
@@ -489,9 +489,17 @@ You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster dep
 
 ## Troubleshooting
 
-* If your Cassandra instance is not running properly, you may check the logs using `kubectl logs <your-pod-name>`
-* To clean/delete your data on your Persistent Volumes, delete your PVCs using `kubectl delete pvc --all`
-* If your Cassandra nodes are not joining, delete your controller/statefulset then delete your Cassandra service. `kubectl delete <rc or statefulsets> cassandra` `kubectl delete svc cassandra`
+* If your Cassandra instance is not running properly, you may check the logs using
+	* `kubectl logs <your-pod-name>`
+* To clean/delete your data on your Persistent Volumes, delete your PVCs using
+	* `kubectl delete pvc -l app=cassandra`
+* If your Cassandra nodes are not joining, delete your controller/statefulset then delete your Cassandra service.
+	* `kubectl delete rc cassandra` if you created the Cassandra Replication Controller
+	* `kubectl delete statefulset cassandra` if you created the Cassandra StatefulSet
+	* `kubectl delete svc cassandra`
+* To delete everything:
+	* `kubectl delete rc,statefulset,pvc,svc -l app=cassnadra`
+	* `kubectl delete pv -l tpye=local`
 
 ## License
 

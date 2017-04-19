@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: cassandra
+  # The labels will be applied automatically
+  # from the labels in the pod template, if not set
+  # labels:
+    # app: cassandra
+spec:
+  replicas: 1
+  # The selector will be applied automatically
+  # from the labels in the pod template, if not set.
+  # selector:
+      # app: cassandra
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      containers:
+        - env:
+            - name: CASSANDRA_SEED_DISCOVERY
+              value: cassandra
+            # CASSANDRA_SEED_DISCOVERY should match the name of the service in cassandra-service.yaml
+
+            - name: MAX_HEAP_SIZE
+              value: 512M
+            - name: HEAP_NEWSIZE
+              value: 100M
+            - name: CASSANDRA_CLUSTER_NAME
+              value: Cassandra
+            - name: CASSANDRA_DC
+              value: DC1
+            - name: CASSANDRA_RACK
+              value: Rack1
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              value: GossipingPropertyFileSnitch
+          image: anthonyamanse/cassandra-demo:7.0
+          name: cassandra
+          ports:
+            - containerPort: 7000
+              name: intra-node
+            - containerPort: 7001
+              name: tls-intra-node
+            - containerPort: 7199
+              name: jmx
+            - containerPort: 9042
+              name: cql
+          volumeMounts:
+            - mountPath: /var/lib/cassandra/data
+              name: data
+      volumes:
+        - name: data
+          emptyDir: {}

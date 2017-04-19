@@ -35,7 +35,9 @@ If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to B
 
 [![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment)
 
-Please follow the [Toolchain instructions](#toolchain-instructions) to complete your toolchain and pipeline.
+Please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions.md) to complete your toolchain and pipeline.
+
+The Cassandra cluster will not be exposed on the public IP of the Kubernetes cluster. You can still access them by exporting your Kubernetes cluster configuration using `bx cs cluster-config <your-cluster-name>` and doing [Step 5](#5-using-cql) or to simply check their status `kubectl exec <POD-NAME> -- nodetool status`
 
 ## Steps
 
@@ -443,48 +445,6 @@ UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-488
 
 # 10. Using CQL
 You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster deployed with StatefulSet.
-
-# Toolchain instructions
-
-> Note: This toolchain instruction is based on this [tutorial](https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines).
-
-1. Click the Create [toolchain button](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment) to fork the repo into your GitHub account.
-
-2. If you have not authenticated to GitHub you will see an Authorize button.
-
-3. Once the repository is forked, you will be taken to the Bluemix Continuous Delivery toolchain setup. This toolchain has been defined by the template in the sample repository.
-
-4. Click the Create button. This will generate a toolchain that looks like the following:
-
-![toolchain](images/toolchain.png)
-
-5. Select the Delivery Pipeline tile from the toolchain view to open the pipeline stages view.
-
-6. The pipeline executes immediately after being created. The Deploy stage will fail on the first run because we are missing your account information for authentication. Click on the gear at the top right corner of the Deploy stage to select Configure Stage.
-
-![deploy](images/toolchain-deploy.png)
-
-7. Set the following environment properties
-
-    BLUEMIX_USER – your Bluemix user ID.
-    
-    BLUEMIX_PASSWORD – your Bluemix password.
-    
-    BLUEMIX_ACCOUNT – The GUID of the Bluemix account where you created the cluster. Retrieve it with `bx iam accounts`.
-    
-    CLUSTER_NAME – Your cluster name. Retrieve it with `bx cs clusters`. 
-    
-> Note: For federated id user, since you can't login with Bluemix user and password via Bluemix CLI, you need to obtain an Apikey for login via https://console.ng.bluemix.net/docs/containers/cs_troubleshoot.html#cs_federated_id. Once you have your APIkey, click **add property** under environment properties. Then add a new property called `API_KEY` and set it to your APIkey. 
-   
-![env](images/env-example.png)
-
-8. Run the Deploy stage using the Run Stage button at the top righthand side of the stage’s card. This time the Deploy stage will succeed and the WordPress sample will be deployed.
-    
-![run](images/deploy-run.png)
-
-9. Click **View logs and history** of the Deploy stage to find the URL of the WordPress application.
-
-10. Congratulations, you now have a Cassandra cluster! The Cassandra cluster was created using a replication controller.
 
 
 ## Troubleshooting

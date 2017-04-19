@@ -28,7 +28,14 @@ Create a Kubernetes cluster with IBM Bluemix Container Service.
 
 If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-journey-template) tutorial.
 
+## Deploy to Bluemix
+If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to Bluemix' button below to create a Bluemix DevOps service toolchain and pipeline for deploying the WordPress sample, else jump to [Steps](#steps)
 
+> You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
+
+[![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment)
+
+Please follow the [Toolchain instructions](#toolchain-instructions) to complete your toolchain and pipeline.
 
 ## Steps
 
@@ -36,7 +43,7 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 
 1. [Create a Cassandra Headless Service](#1-create-a-cassandra-headless-service)
 
-### Use Replication Controller to create non-persistent Caasandra cluster
+### Use Replication Controller to create non-persistent Cassandra cluster
 
 2. [Create a Replication Controller](#2-create-a-replication-controller)
 3. [Validate the Replication Controller](#3-validate-the-replication-controller)
@@ -51,7 +58,7 @@ If you have not setup the Kubernetes cluster, please follow the [Creating a Kube
 9. [Scale the StatefulSet](#9-scale-the-statefulset)
 10. [Using Cassandra Query Language(CQL)](#10-using-cql)
 
-#### [Troubleshooting](#troubleshooting)
+#### [Troubleshooting](#troubleshooting-1)
 
 
 # 1. Create a Cassandra Headless Service
@@ -291,6 +298,8 @@ bin  boot  dev	docker-entrypoint.sh  etc  home  initial-seed.cql  lib	lib64  med
 ```
 
 Now run the sample .cql file to create and update employee table on cassandra keyspace using the following commands:
+> You only need to run the .cql file **once** in **ONE** Cassandra node. The other pods should also have access to the sample table created by the .cql file.
+
 ```bash
 root@cassandra-xxxxx:/# cqlsh -f initial-seed.cql
 root@cassandra-xxxxx:/# cqlsh
@@ -337,7 +346,7 @@ cqlsh> SELECT * FROM my_cassandra_keyspace.employee;
       3 |   Austin |      Bob | 9848022330 |   45000
 ```
 
-You have you non-persistent Caasandra cluster ready!!
+You now have a non-persistent Caasandra cluster ready!!
 
 **If you want to create persistent Cassandra clusters, pelase move forward. Before proceeding to the next steps, delete your Cassandra Replication Controller.**
 
@@ -417,7 +426,7 @@ cassandra-1   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx
 cassandra-2   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 cassandra-3   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 ```
-You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster. **Substitute the Pod name to the one you have:**
+You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster.
 ```bash
 $ kubectl exec -ti cassandra-0 -- nodetool status
 Datacenter: DC1
@@ -435,11 +444,62 @@ UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-488
 # 10. Using CQL
 You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster deployed with StatefulSet.
 
+# Toolchain instructions
+
+> Note: This toolchain instruction is based on this [tutorial](https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines).
+
+1. Click the Create [toolchain button](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment) to fork the repo into your GitHub account.
+
+2. If you have not authenticated to GitHub you will see an Authorize button.
+
+3. Once the repository is forked, you will be taken to the Bluemix Continuous Delivery toolchain setup. This toolchain has been defined by the template in the sample repository.
+
+4. Click the Create button. This will generate a toolchain that looks like the following:
+
+![toolchain](images/toolchain.png)
+
+5. Select the Delivery Pipeline tile from the toolchain view to open the pipeline stages view.
+
+6. The pipeline executes immediately after being created. The Deploy stage will fail on the first run because we are missing your account information for authentication. Click on the gear at the top right corner of the Deploy stage to select Configure Stage.
+
+![deploy](images/toolchain-deploy.png)
+
+7. Set the following environment properties
+
+    BLUEMIX_USER – your Bluemix user ID.
+    
+    BLUEMIX_PASSWORD – your Bluemix password.
+    
+    BLUEMIX_ACCOUNT – The GUID of the Bluemix account where you created the cluster. Retrieve it with `bx iam accounts`.
+    
+    CLUSTER_NAME – Your cluster name. Retrieve it with `bx cs clusters`. 
+    
+> Note: For federated id user, since you can't login with Bluemix user and password via Bluemix CLI, you need to obtain an Apikey for login via https://console.ng.bluemix.net/docs/containers/cs_troubleshoot.html#cs_federated_id. Once you have your APIkey, click **add property** under environment properties. Then add a new property called `API_KEY` and set it to your APIkey. 
+   
+![env](images/env-example.png)
+
+8. Run the Deploy stage using the Run Stage button at the top righthand side of the stage’s card. This time the Deploy stage will succeed and the WordPress sample will be deployed.
+    
+![run](images/deploy-run.png)
+
+9. Click **View logs and history** of the Deploy stage to find the URL of the WordPress application.
+
+10. Congratulations, you now have a Cassandra cluster! The Cassandra cluster was created using a replication controller.
+
+
 ## Troubleshooting
 
-* If your Cassandra instance is not running properly, you may check the logs using `kubectl logs <your-pod-name>`
-* To clean/delete your data on your Persistent Volumes, delete your PVCs using `kubectl delete pvc --all`
-* If your Cassandra nodes are not joining, delete your controller/statefulset then delete your Cassandra service. `kubectl delete <rc or statefulsets> cassandra` `kubectl delete svc cassandra`
+* If your Cassandra instance is not running properly, you may check the logs using
+	* `kubectl logs <your-pod-name>`
+* To clean/delete your data on your Persistent Volumes, delete your PVCs using
+	* `kubectl delete pvc -l app=cassandra`
+* If your Cassandra nodes are not joining, delete your controller/statefulset then delete your Cassandra service.
+	* `kubectl delete rc cassandra` if you created the Cassandra Replication Controller
+	* `kubectl delete statefulset cassandra` if you created the Cassandra StatefulSet
+	* `kubectl delete svc cassandra`
+* To delete everything:
+	* `kubectl delete rc,statefulset,pvc,svc -l app=cassnadra`
+	* `kubectl delete pv -l tpye=local`
 
 ## License
 

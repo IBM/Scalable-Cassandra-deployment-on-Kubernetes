@@ -37,21 +37,26 @@ kubectl create -f cassandra-controller.yaml
 
 SEED_NODE=$(kubectl get pods | grep cassandra | awk '{print $1}')
 echo "Seed node is ${SEED_NODE}"
-sleep 15s
+echo "Waiting for Cassansdra Pod to initialize..."
+sleep 30s
+
 
 STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 
 while [ ${#STATUS} -eq 0 ]
 do
     echo "Waiting for Cassandra to finish setting up..."
-    sleep 30s
+    sleep 10s
     STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 done
 
+echo "Cassandra Node is UP and NORMAL"
 kubectl exec $SEED_NODE -- nodetool status
+
+echo "Scaling the Replication Controller..."
 kubectl scale rc cassandra --replicas=4
 
-sleep 15s
+sleep 5s
 
 TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
 
@@ -61,7 +66,7 @@ do
     # echo ${#TEST}
     echo "Waiting for all Cassandra nodes to join and set up."
 
-    sleep 15s
+    sleep 5s
     TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
 done
 

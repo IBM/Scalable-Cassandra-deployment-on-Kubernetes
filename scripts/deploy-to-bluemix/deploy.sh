@@ -22,9 +22,12 @@ kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
 kubectl delete --ignore-not-found=true -f local-volumes.yaml
 
 kuber=$(kubectl get pods -l app=cassandra)
-if [ ${#kuber} -ne 0 ]; then
-	sleep 60s
-fi
+while [ ${#kuber} -ne 0 ]
+do
+	sleep 5s
+    kubectl get pods -l app=cassandra
+    kuber=$(kubectl get pods -l app=cassandra)
+done
 
 echo -e "Creating headless service..."
 kubectl create -f cassandra-service.yaml
@@ -32,35 +35,38 @@ kubectl create -f cassandra-service.yaml
 echo -e "Creating Replication Controller..."
 kubectl create -f cassandra-controller.yaml
 
-sleep 30s
-STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status | grep UN)
+SEED_NODE=$(kubectl get pods | grep cassandra | awk '{print $1}')
+echo "Seed node is ${SEED_NODE}"
+sleep 15s
+
+STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 
 while [ ${#STATUS} -eq 0 ]
 do
     echo "Waiting for Cassandra to finish setting up..."
     sleep 30s
-    STATUS=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status | grep UN)
+    STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 done
 
-kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}') -- nodetool status
+kubectl exec $SEED_NODE -- nodetool status
 kubectl scale rc cassandra --replicas=4
 
 sleep 15s
 
-TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
+TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
 
 while [ "${#TEST}" != "11" ]
 do
-    kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
+    kubectl exec $SEED_NODE -- nodetool status
     # echo ${#TEST}
     echo "Waiting for all Cassandra nodes to join and set up."
 
     sleep 15s
-    TEST=$(kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status | grep UN | awk '{print $1}')
+    TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
 done
 
 echo "Your cassandra cluster is now up and normal"
-kubectl exec $(kubectl get pods | grep cassandra | awk '{print $1}' | head -1) -- nodetool status
+kubectl exec $SEED_NODE -- nodetool status
 
 
 echo "You can also view your Cassandra cluster on your machine"

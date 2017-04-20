@@ -5,7 +5,7 @@
 
 This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud. 
 
-In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassandra understands that it is running within a cluster manager, and uses this cluster management infrastructure to help implement the application. LeveragingKubernetes concepts like Replication Controller, StatefulSets we provide step by step instructions to deploy either non-persistent or persistent Cassandra clusters on top of Bluemix Container Service using Kubernetes cluster
+In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassandra understands that it is running within a cluster manager, and uses this cluster management infrastructure to help implement the application. Leveraging Kubernetes concepts like Replication Controller, StatefulSets we provide step by step instructions to deploy either non-persistent or persistent Cassandra clusters on top of Bluemix Container Service using Kubernetes cluster
 
 ![kube-cassandra](images/kube-cassandra.png)
 

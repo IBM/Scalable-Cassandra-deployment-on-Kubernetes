@@ -1,7 +1,7 @@
 
 [![Build Status](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment)
 
-# Scalable multi-node Cassandra cluster on Bluemix Container Service using Kubernetes
+# Scalable multi-node Cassandra cluster on using Kubernetes Cluster
 
 This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud. 
 
@@ -29,7 +29,7 @@ Create a Kubernetes cluster with IBM Bluemix Container Service.
 If you have not setup the Kubernetes cluster, please follow the [Creating a Kubernetes cluster](https://github.com/IBM/container-journey-template) tutorial.
 
 ## Deploy to Bluemix
-If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to Bluemix' button below to create a Bluemix DevOps service toolchain and pipeline for deploying the WordPress sample, else jump to [Steps](#steps)
+If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to Bluemix' button below to create a Bluemix DevOps service toolchain and pipeline for deploying the sample, else jump to [Steps](#steps)
 
 > You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 

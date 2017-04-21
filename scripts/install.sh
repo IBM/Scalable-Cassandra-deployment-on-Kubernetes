@@ -27,7 +27,7 @@ function cluster_setup() {
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep export)
 git clone https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes.git
-cd kubernetes-container-service-cassandra-deployment
+cd scalable-cassandra-deployment-on-kubernetes
 kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml

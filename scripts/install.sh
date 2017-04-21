@@ -31,8 +31,13 @@ cd scalable-cassandra-deployment-on-kubernetes
 kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
-kubectl get svc
-kubectl get pods
+
+while [ ${#kuber} -ne 0 ]
+do
+    sleep 5s
+    kubectl get pods -l app=cassandra
+    kuber=$(kubectl get pods -l app=cassandra)
+done
 }
 
 function run_tests() {

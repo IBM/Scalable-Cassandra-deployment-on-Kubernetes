@@ -32,6 +32,7 @@ kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
 
+kuber=$(kubectl get pods -l app=cassandra)
 while [ ${#kuber} -ne 0 ]
 do
     sleep 5s
@@ -59,9 +60,9 @@ STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 
 while [ ${#STATUS} -eq 0 ]
 do
-echo "Waiting for Cassandra to finish setting up..."
-sleep 10s
-STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
+    echo "Waiting for Cassandra to finish setting up..."
+    sleep 10s
+    STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
 done
 
 echo "Cassandra Node is UP and NORMAL"

@@ -13,7 +13,7 @@ sample-repo:
   service_id: githubpublic
   parameters:
     repo_name: "{{name}}"
-    repo_url: https://github.com/IBM/kubernetes-container-service-cassandra-deployment.git
+    repo_url: https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes.git
     type: fork
     has_issues: false
 

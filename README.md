@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment.svg?branch=master)](https://travis-ci.org/IBM/kubernetes-container-service-cassandra-deployment)
+[![Build Status](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes.svg?branch=master)](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes)
 
 # Scalable multi-node Cassandra cluster on Bluemix Container Service using Kubernetes Cluster
 
@@ -35,7 +35,7 @@ If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to B
 
 > You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
-[![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/kubernetes-container-service-cassandra-deployment)
+[![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
 
 Please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions.md) to complete your toolchain and pipeline.
 

@@ -1,11 +1,6 @@
 #!/bin/bash
 
-echo "Create Cassandra"
-IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep deployed | awk '{ print $2 }')
-if [ -z $IP_ADDR ]; then
-  echo "$CLUSTER_NAME not created or workers not ready"
-  exit 1
-fi
+echo "Creating Cassandra"
 
 echo -e "Configuring vars"
 exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)

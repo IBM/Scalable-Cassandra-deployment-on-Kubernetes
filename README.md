@@ -463,6 +463,9 @@ You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster dep
 	* `kubectl delete rc,statefulset,pvc,svc -l app=cassnadra`
 	* `kubectl delete pv -l tpye=local`
 
+## References
+* This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/examples/storage/cassandra)
+
 ## License
 
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)

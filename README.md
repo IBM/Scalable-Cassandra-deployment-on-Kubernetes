@@ -9,7 +9,7 @@ In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassa
 
 Leveraging Kubernetes concepts like Replication Controller, StatefulSets we provide step by step instructions to deploy either non-persistent or persistent Cassandra clusters on top of Bluemix Container Service using Kubernetes cluster
 
-![kube-cassandra](images/kube-cassandra.png)
+![kube-cassandra](images/kube-cassandra-code.png)
 
 ## Kubernetes Concepts Used
 

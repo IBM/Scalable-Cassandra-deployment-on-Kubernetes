@@ -35,7 +35,7 @@ If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to B
 
 > You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
-[![Create Toolchain](images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
 
 Please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions.md) to complete your toolchain and pipeline.
 
@@ -464,7 +464,7 @@ You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster dep
 	* `kubectl delete pv -l tpye=local`
 
 ## References
-* This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/examples/storage/cassandra)
+* This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/examples/storage/cassandra).
 
 ## License
 

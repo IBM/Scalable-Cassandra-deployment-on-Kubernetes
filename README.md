@@ -3,9 +3,9 @@
 
 # Scalable multi-node Cassandra using Kubernetes Cluster
 
-This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud. 
+This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud.
 
-In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassandra understands that it is running within a cluster manager, and uses this cluster management infrastructure to help implement the application. 
+In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassandra understands that it is running within a cluster manager, and uses this cluster management infrastructure to help implement the application.
 
 Leveraging Kubernetes concepts like Replication Controller, StatefulSets we provide step by step instructions to deploy either non-persistent or persistent Cassandra clusters on top of Bluemix Container Service using Kubernetes cluster
 
@@ -35,7 +35,7 @@ If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to B
 
 > You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
-[![Create Toolchain](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
+[![Create Toolchain](images/button.svg)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
 
 Please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions.md) to complete your toolchain and pipeline.
 
@@ -361,7 +361,7 @@ $ kubectl delete rc cassandra
 
 If you have not done it before, please [create a Cassandra Headless Service](#1-create-a-cassandra-headless-service) before moving forward.
 
-To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**. 
+To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**.
 
 For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
 > Example: If you are expecting to have 4 Cassandra nodes, you'll need to create 4 Persistent Volumes

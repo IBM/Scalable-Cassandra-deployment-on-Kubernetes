@@ -1,7 +1,7 @@
 
 [![Build Status](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes.svg?branch=master)](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes)
 
-# Scalable multi-node Cassandra cluster using Kubernetes Cluster
+# Scalable multi-node Cassandra using Kubernetes Cluster
 
 This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud. 
 
@@ -11,18 +11,18 @@ Leveraging Kubernetes concepts like Replication Controller, StatefulSets we prov
 
 ![kube-cassandra](images/kube-cassandra.png)
 
-## Included Components
-- [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
-- [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
-- [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
-- [Cassandra](http://cassandra.apache.org/)
-
 ## Kubernetes Concepts Used
 
 - [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
 - [Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
 - [Kubernetes Replication Controller](https://kubernetes.io/docs/user-guide/replication-controller/)
 - [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+
+## Included Components
+- [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+- [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+- [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+- [Cassandra](http://cassandra.apache.org/)
 
 ## Prerequisite
 

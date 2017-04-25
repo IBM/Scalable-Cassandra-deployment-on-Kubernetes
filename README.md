@@ -1,7 +1,7 @@
 
 [![Build Status](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes.svg?branch=master)](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes)
 
-# Scalable multi-node Cassandra cluster on Bluemix Container Service using Kubernetes Cluster
+# Scalable multi-node Cassandra cluster using Kubernetes Cluster
 
 This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud. 
 

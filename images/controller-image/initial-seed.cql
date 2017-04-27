@@ -2,7 +2,7 @@
 DROP KEYSPACE IF EXISTS my_cassandra_keyspace;
 
 -- Create our keyspace
-CREATE KEYSPACE my_cassandra_keyspace WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 3 };
+CREATE KEYSPACE my_cassandra_keyspace WITH replication ={ 'class': 'SimpleStrategy', 'replication_factor': 2 };
 
 -- Use the keyspace
 USE my_cassandra_keyspace;

@@ -118,10 +118,6 @@ spec:
               value: cassandra
             # CASSANDRA_SEED_DISCOVERY should match the name of the service in cassandra-service.yaml
 
-            - name: MAX_HEAP_SIZE
-              value: 512M
-            - name: HEAP_NEWSIZE
-              value: 100M
             - name: CASSANDRA_CLUSTER_NAME
               value: Cassandra
             - name: CASSANDRA_DC
@@ -206,20 +202,6 @@ cassandra-vsqx4   1/1       Running   0          38m       172.xxx.xxx.xxx   169
 cassandra-jjx52   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 cassandra-wzlxl   1/1       Running   0          38m       172.xxx.xxx.xxx   169.xxx.xxx.xxx
 ```
-You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster. **Substitute the Pod name to the one you have:**
-```bash
-$ kubectl exec -ti cassandra-xxxxx -- nodetool status
-Datacenter: DC1
-===============
-Status=Up/Down
-|/ State=Normal/Leaving/Joining/Moving
---  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
-UN  172.xxx.xxx.xxx  109.28 KB  256          50.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
-UN  172.xxx.xxx.xxx  196.04 KB  256          51.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
-UN  172.xxx.xxx.xxx  114.44 KB  256          46.2%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
-UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
-```
-
 
 You can check that the Pods are visible to the Service using the following service endpoints query:
 ```bash
@@ -273,6 +255,23 @@ subsets:
     - port: 9042
       protocol: TCP
 ```
+
+You can perform a **nodetool status** to check if the other cassandra nodes have joined and formed a Cassandra cluster. **Substitute the Pod name to the one you have:**
+```bash
+$ kubectl exec -ti cassandra-xxxxx -- nodetool status
+Datacenter: DC1
+===============
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  172.xxx.xxx.xxx  109.28 KB  256          50.0%             6402e90d-7995-4ee1-bb9c-36097eb2c9ec  Rack1
+UN  172.xxx.xxx.xxx  196.04 KB  256          51.4%             62eb2a08-c621-4d9c-a7ee-ebcd3c859542  Rack1
+UN  172.xxx.xxx.xxx  114.44 KB  256          46.2%             41e7d359-be9b-4ff1-b62f-1d04aa03a40c  Rack1
+UN  172.xxx.xxx.xxx  79.83 KB   256          52.4%             fb1dd881-0eff-4883-88d0-91ee31ab5f57  Rack1
+```
+
+
+
 # 5. Using CQL
 > **Note:** It can take around 5 minutes for the Cassandra database to finish its setup.
 

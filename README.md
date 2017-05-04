@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes.svg?branch=master)](https://travis-ci.org/IBM/scalable-cassandra-deployment-on-kubernetes)
+[![Build Status](https://travis-ci.org/IBM/Scalable-Cassandra-deployment-on-Kubernetes.svg?branch=master)](https://travis-ci.org/IBM/Scalable-Cassandra-deployment-on-Kubernetes)
 
 # Scalable multi-node Cassandra deployment on Kubernetes Cluster
 
@@ -458,7 +458,7 @@ You can do [Step 5](#5-using-cql) again to use CQL in your Cassandra Cluster dep
 	* `kubectl delete svc cassandra`
 * To delete everything:
 	* `kubectl delete rc,statefulset,pvc,svc -l app=cassnadra`
-	* `kubectl delete pv -l tpye=local`
+	* `kubectl delete pv -l type=local`
 
 ## References
 * This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/examples/storage/cassandra).

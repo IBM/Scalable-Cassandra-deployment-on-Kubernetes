@@ -87,10 +87,11 @@ done
 
 echo "Your cassandra cluster is now up and normal"
 kubectl exec $SEED_NODE -- nodetool status
+echo "Travis build has finished. Cleaning up..."
 }
 
 install_bluemix_cli
 bluemix_auth
 cluster_setup
 run_tests
-
+cluster_setup

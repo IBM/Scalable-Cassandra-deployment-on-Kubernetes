@@ -9,8 +9,7 @@ sudo curl -o /usr/share/bash-completion/completions/cf https://raw.githubusercon
 cf --version
 curl -L public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/Bluemix_CLI_0.5.1_amd64.tar.gz > Bluemix_CLI.tar.gz
 tar -xvf Bluemix_CLI.tar.gz
-cd Bluemix_CLI
-sudo ./install_bluemix_cli
+sudo ./Bluemix_CLI/install_bluemix_cli
 }
 
 function bluemix_auth() {
@@ -26,8 +25,6 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 function cluster_setup() {
 bx cs workers cassandra-demo
 $(bx cs cluster-config cassandra-demo | grep export)
-git clone https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes.git
-cd scalable-cassandra-deployment-on-kubernetes
 kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml

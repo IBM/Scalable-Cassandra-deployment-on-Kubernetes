@@ -38,7 +38,7 @@
             "type": "string"
         }
     },
-    "required": ["prod-region", "prod-organization", "prod-space", "prod-app-name"],
+    "required": ["prod-region", "prod-organization", "prod-space"],
     "form": [
        {
           "type": "validator",

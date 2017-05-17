@@ -34,7 +34,7 @@ sample-build:
       BLUEMIX_USER: "{{deploy.parameters.bluemix-user}}"
       BLUEMIX_PASSWORD: "{{deploy.parameters.bluemix-password}}"
       API_KEY: "{{deploy.parameters.bluemix-api-key}}"
-      BLUEMIX_ACCOUNT: "{{deploy.parameters.bluemix-account}}"
+      BLUEMIX_ACCOUNT: "{{deploy.parameters.bluemix-cluster-account}}"
       CLUSTER_NAME: "{{deploy.parameters.bluemix-cluster-name}}"
      execute: true
     services: ["sample-repo"]

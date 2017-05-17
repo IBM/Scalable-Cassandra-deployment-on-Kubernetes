@@ -33,7 +33,7 @@ If you want to deploy Cassandra nodes directly to Bluemix, click on 'Deploy to B
 
 > You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
-[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes)
+[![Create Toolchain](https://github.com/IBM/container-journey-template/blob/master/images/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/)
 
 Please follow the [Toolchain instructions](https://github.com/IBM/container-journey-template/blob/master/Toolchain_Instructions.md) to complete your toolchain and pipeline.
 

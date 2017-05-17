@@ -63,7 +63,7 @@
           "type": "password",
           "readonly": false,
           "title": "Bluemix Cluster Account",
-          "key": "bluemix-cluster-account"
+          "key": "bluemix-account"
         },{
           "type": "text",
           "readonly": false,

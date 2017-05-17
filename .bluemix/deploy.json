@@ -29,7 +29,7 @@
             "description": "Required for **Federated ID** since Federated ID can't login with Bluemix user and password via Bluemix CLI. You can obtain your API_KEY via https://console.ng.bluemix.net/iam/#/apikeys by clicking **Create API key** (Each API key only can be viewed once).",
             "type": "string"
         },
-       "bluemix-cluster-account": {
+       "bluemix-account": {
             "description": "The GUID of the Bluemix account where you created the cluster. Retrieve it with [bx iam accounts].",
             "type": "string"
         },

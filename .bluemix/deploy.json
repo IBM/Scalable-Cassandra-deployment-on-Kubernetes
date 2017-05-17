@@ -17,8 +17,24 @@
             "description": "The bluemix space",
             "type": "string"
         },
-       "prod-app-name": {
-            "description": "The name of your Hello World app",
+       "bluemix-user": {
+            "description": "Your Bluemix user ID",
+            "type": "string"
+        },
+       "bluemix-password": {
+            "description": "Your Bluemix Password",
+            "type": "string"
+        },
+       "bluemix-api-key": {
+            "description": "API key for your Bluemix account",
+            "type": "string"
+        },
+       "bluemix-cluster-account": {
+            "description": "The GUID of the Bluemix account where you created the cluster. Retrieve it with ```bx iam accounts```.",
+            "type": "string"
+        },
+       "bluemix-cluster-name": {
+            "description": "Your cluster name. Retrieve it with ```bx cs clusters```.",
             "type": "string"
         }
     },
@@ -31,8 +47,28 @@
         {
           "type": "text",
           "readonly": false,
-          "title": "App name",
-          "key": "prod-app-name"
+          "title": "Bluemix User ID",
+          "key": "bluemix-user"
+        },{
+          "type": "password",
+          "readonly": false,
+          "title": "Bluemix Password",
+          "key": "bluemix-password"
+        },{
+          "type": "text",
+          "readonly": false,
+          "title": "Bluemix API Key (Optional)",
+          "key": "bluemix-api-key"
+        },{
+          "type": "text",
+          "readonly": false,
+          "title": "Bluemix Cluster Account",
+          "key": "bluemix-cluster-account"
+        },{
+          "type": "text",
+          "readonly": false,
+          "title": "Bluemix Cluster Name",
+          "key": "bluemix-cluster-name"
         },
         {
             "type": "table",
@@ -57,7 +93,7 @@
                 },
                 {
                   "type": "label",
-                  "title": "Production stage"
+                  "title": "Deployment Configuration"
                 },
                 {
                   "type": "select",

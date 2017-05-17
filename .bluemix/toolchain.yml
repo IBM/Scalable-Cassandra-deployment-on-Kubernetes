@@ -14,7 +14,7 @@ sample-repo:
   parameters:
     repo_name: "{{name}}"
     repo_url: https://github.com/IBM/scalable-cassandra-deployment-on-kubernetes.git
-    type: fork
+    type: clone
     has_issues: false
 
 # Pipelines

@@ -23,8 +23,8 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 }
 
 function cluster_setup() {
-bx cs workers anthony-cluster-travis
-$(bx cs cluster-config anthony-cluster-travis | grep export)
+bx cs workers $CLUSTER_NAME
+$(bx cs cluster-config $CLUSTER_NAME | grep export)
 kubectl delete --ignore-not-found=true -f cassandra-service.yaml
 kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
 kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml

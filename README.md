@@ -3,6 +3,8 @@
 
 # Scalable multi-node Cassandra deployment on Kubernetes Cluster
 
+*Read this in other languages: [한국어](README-ko.md).*
+
 This project demonstrates the deployment of a multi-node scalable Cassandra cluster on Kubernetes. Apache Cassandra is a massively scalable open source NoSQL database. Cassandra is perfect for managing large amounts of structured, semi-structured, and unstructured data across multiple datacenters and the cloud.
 
 In this journey we show a cloud native Cassandra deployment on Kubernetes. Cassandra understands that it is running within a cluster manager, and uses this cluster management infrastructure to help implement the application.

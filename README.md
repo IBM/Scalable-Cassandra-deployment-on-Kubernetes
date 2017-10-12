@@ -367,7 +367,9 @@ If you have not done it before, please [create a Cassandra Headless Service](#1-
 
 To create persistent Cassandra nodes, we need to provision Persistent Volumes. There are two ways to provision PV's: **dynamically and statically**.
 
-For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
+For **Dynamic** provisioning, you'll need to have **StorageClasses** and you'll need to have a **paid** Kubernetes cluster service. If you have one and choose to use Dynamic provisioning, specify the StorageClass you'd like to use in the `cassandra-statefulset.yaml` file or comment the annotations for StorageClass to use the default set in your Kubernetes cluster.
+
+In this journey, we will use **Static** provisioning where we will create volumes manually using the provided yaml files. **You'll need to have the same number of Persistent Volumes as the number of your Cassandra nodes.**
 > Example: If you are expecting to have 4 Cassandra nodes, you'll need to create 4 Persistent Volumes
 
 The provided yaml file already has **4** Persistent Volumes defined. Configure them to add more if you expect to have greater than 4 Cassandra nodes.

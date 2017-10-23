@@ -3,8 +3,8 @@
 echo "Creating Cassandra"
 
 echo -e "Configuring vars"
-exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
-if [ $? -ne 0 ]; then
+exp=$(bx cs cluster-config "$CLUSTER_NAME" | grep export)
+if ! bx cs cluster-config "$CLUSTER_NAME" | grep export ; then
   echo "Cluster $CLUSTER_NAME not created or not ready."
   exit 1
 fi
@@ -36,37 +36,37 @@ echo "Waiting for Cassansdra Pod to initialize..."
 sleep 30s
 
 
-STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
+STATUS=$(kubectl exec "$SEED_NODE" -- nodetool status | grep UN)
 
 while [ ${#STATUS} -eq 0 ]
 do
     echo "Waiting for Cassandra to finish setting up..."
     sleep 10s
-    STATUS=$(kubectl exec $SEED_NODE -- nodetool status | grep UN)
+    STATUS=$(kubectl exec "$SEED_NODE" -- nodetool status | grep UN)
 done
 
 echo "Cassandra Node is UP and NORMAL"
-kubectl exec $SEED_NODE -- nodetool status
+kubectl exec "$SEED_NODE" -- nodetool status
 
 echo "Scaling the Replication Controller..."
 kubectl scale rc cassandra --replicas=4
 
 sleep 5s
 
-TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
+TEST=$(kubectl exec "$SEED_NODE" -- nodetool status | grep UN | awk '{print $1}')
 
 while [ "${#TEST}" != "11" ]
 do
-    kubectl exec $SEED_NODE -- nodetool status
+    kubectl exec "$SEED_NODE" -- nodetool status
     # echo ${#TEST}
     echo "Waiting for all Cassandra nodes to join and set up."
 
     sleep 5s
-    TEST=$(kubectl exec $SEED_NODE -- nodetool status | grep UN | awk '{print $1}')
+    TEST=$(kubectl exec "$SEED_NODE" -- nodetool status | grep UN | awk '{print $1}')
 done
 
 echo "Your cassandra cluster is now up and normal"
-kubectl exec $SEED_NODE -- nodetool status
+kubectl exec "$SEED_NODE" -- nodetool status
 
 
 echo "You can also view your Cassandra cluster on your machine"

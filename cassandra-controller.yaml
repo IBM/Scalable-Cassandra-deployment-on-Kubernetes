@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -5,13 +6,13 @@ metadata:
   # The labels will be applied automatically
   # from the labels in the pod template, if not set
   # labels:
-    # app: cassandra
+  #   app: cassandra
 spec:
   replicas: 1
   # The selector will be applied automatically
   # from the labels in the pod template, if not set.
   # selector:
-      # app: cassandra
+  #   app: cassandra
   template:
     metadata:
       labels:
@@ -21,7 +22,8 @@ spec:
         - env:
             - name: CASSANDRA_SEED_DISCOVERY
               value: cassandra
-            # CASSANDRA_SEED_DISCOVERY should match the name of the service in cassandra-service.yaml
+            # CASSANDRA_SEED_DISCOVERY should match the
+            # name of the service in cassandra-service.yaml
 
             - name: MAX_HEAP_SIZE
               value: 512M

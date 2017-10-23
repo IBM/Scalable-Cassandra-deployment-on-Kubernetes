@@ -45,6 +45,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: cassandra-data
+      annotations: # comment line if you want to use a StorageClass or specify which StorageClass
+        volume.beta.kubernetes.io/storage-class: "" # comment line if you want to use a StorageClass or specify which StorageClass
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

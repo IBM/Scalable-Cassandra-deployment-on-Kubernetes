@@ -1,7 +1,15 @@
 #!/bin/bash
 
+# This script is intended to be run by Travis CI. If running elsewhere, invoke
+# it with: TRAVIS_PULL_REQUEST=false [path to script]
+# CLUSTER_NAME must be set prior to running (see environment variables in the
+# Travis CI documentation).
+
+# shellcheck disable=SC1090
+source "$(dirname "$0")"/../scripts/resources.sh
+
 kubectl_clean() {
-    echo -e "Deleting previous version of wordpress if it exists"
+    echo -e "Deleting previous version of cassandra if it exists"
     kubectl delete --ignore-not-found=true -f cassandra-service.yaml
     kubectl delete --ignore-not-found=true -f cassandra-controller.yaml
     kubectl delete --ignore-not-found=true -f cassandra-statefulset.yaml
@@ -9,7 +17,7 @@ kubectl_clean() {
     while [ ${#kuber} -ne 0 ]
     do
         sleep 5s
-        kubectl get pods -l app=wordpress
+        kubectl get pods -l app=cassandra
         kuber=$(kubectl get pods -l app=cassandra)
     done
     echo "Cleaning done"
@@ -34,25 +42,23 @@ kubectl_config() {
 }
 
 kubectl_deploy() {
-    kubectl_clean
+  kubeclt_clean
 
-    echo -e "Creating headless service..."
-    kubectl create -f cassandra-service.yaml
+  echo "Running scripts/quickstart.sh"
+  "$(dirname "$0")"/../scripts/quickstart.sh
 
-    echo -e "Creating Replication Controller..."
-    kubectl create -f cassandra-controller.yaml
-
+    echo "Waiting for pods to be running"
+    i=0
     while [[ $(kubectl get pods -l app=cassandra | grep -c Running) -ne 1 ]]; do
-        if [[ ! "$i" -lt 24 ]]; then
-            echo "Timeout waiting on pods to be ready. Test FAILED"
-            exit 1
-        fi
-        sleep 10
-        echo "...$i * 10 seconds elapsed..."
-        ((i++))
-    done
-
-    echo "All pods are running"
+      if [[ ! "$i" -lt 24 ]]; then
+          echo "Timeout waiting on pods to be ready"
+          test_failed "$0"
+      fi
+      sleep 10
+      echo "...$i * 10 seconds elapsed..."
+      ((i++))
+  done
+  echo "All pods are running"
 }
 
 verify_deploy() {
@@ -93,22 +99,17 @@ verify_deploy() {
     kubectl exec "$SEED_NODE" -- nodetool status
 }
 
-main() {
-    if [[ "$TRAVIS_PULL_REQUEST" != false ]]; then
-        echo -e "\033[0;33mPull request detected; not running Bluemix Container Service test.\033[0m"
-        exit 0
-    fi
+main(){
+    is_pull_request "$0"
 
     if ! kubectl_config; then
-        echo "Config failed."
-        test_failed
+        test_failed "$0"
     elif ! kubectl_deploy; then
-        echo "Deploy failed"
-        test_failed
+        test_failed "$0"
     elif ! verify_deploy; then
-        test_failed
+        test_failed "$0"
     else
-        test_passed
+        test_passed "$0"
     fi
 }
 

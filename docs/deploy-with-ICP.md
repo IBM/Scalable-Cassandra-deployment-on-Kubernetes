@@ -21,6 +21,4 @@ $ cd Scalable-Cassandra-deployment-on-Kubernetes
 ```
 
 From here, you can follow along with the instructions in the
-[root](../#1-create-a-cassandra-headless-service) of this repo to deploy
-Cassandra.
-
+[root](../README.md#1-create-a-cassandra-headless-service#1-create-a-cassandra-headless-service) of this repo to deploy Cassandra.

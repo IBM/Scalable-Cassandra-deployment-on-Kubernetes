@@ -12,7 +12,7 @@ this VM.  To access your Vagrant VM:
 $ vagrant ssh
 ```
 
-From this promt inside the VM, clone this repo to make use of the included yaml
+From this prompt inside the VM, clone this repo to make use of the included yaml
 files.
 
 ```bash
@@ -21,6 +21,6 @@ $ cd Scalable-Cassandra-deployment-on-Kubernetes
 ```
 
 From here, you can follow along with the instructions in the
-[root](../#1-create-a-cassandra-headless-service) of this repo to deploy
-Cassandra.
+[root](https://github.com/IBM/Scalable-Cassandra-deployment-on-Kubernetes#1-create-a-cassandra-headless-service)
+of this repo to deploy Cassandra.
 

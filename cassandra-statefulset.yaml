@@ -13,8 +13,8 @@ spec:
     spec:
       containers:
         - name: cassandra
-          image: anthonyamanse/cassandra-state:2.0
-          imagePullPolicy: Always
+          image: cassandra:3
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 7000
               name: intra-node
@@ -27,9 +27,8 @@ spec:
           env:
             - name: CASSANDRA_SEEDS
               value: cassandra-0.cassandra.default.svc.cluster.local
-
             - name: MAX_HEAP_SIZE
-              value: 512M
+              value: 256M
             - name: HEAP_NEWSIZE
               value: 100M
             - name: CASSANDRA_CLUSTER_NAME

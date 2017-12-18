@@ -3,7 +3,7 @@
 
 # Kubernetes 集群上的可扩展多节点 Cassandra 部署
 
-*阅读本文的其他语言版本：[???](README-ko.md)。*
+*阅读本文的其他语言版本：[English](README.md)。*
 
 本项目将演示如何将一个多节点可扩展 Cassandra 集群部署在 Kubernetes 上。Apache Cassandra 是一个可大规模扩展的开源 NoSQL 数据库。Cassandra 非常适合管理跨多个数据中心和云的大量结构化、半结构化和非结构化数据。
 

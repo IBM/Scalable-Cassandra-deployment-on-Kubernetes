@@ -1,4 +1,3 @@
-对Persistent Volume的操作请保持全文一致（翻译为持久卷或直接使用英文原文）
 [![构建状态](https://travis-ci.org/IBM/Scalable-Cassandra-deployment-on-Kubernetes.svg?branch=master)](https://travis-ci.org/IBM/Scalable-Cassandra-deployment-on-Kubernetes)
 
 # Kubernetes 集群上的可扩展多节点 Cassandra 部署

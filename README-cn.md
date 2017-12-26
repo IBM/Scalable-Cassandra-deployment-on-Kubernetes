@@ -14,9 +14,9 @@
 
 ## 使用的 Kubernetes 概念
 
-* [Kubenetes Pod](https://kubernetes.io/docs/user-guide/pods)
+* [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
 * [Kubenetes 服务](https://kubernetes.io/docs/user-guide/services)
-* [Kubernets StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+* [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## 包含的组件
 * [Kubernetes 集群](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)

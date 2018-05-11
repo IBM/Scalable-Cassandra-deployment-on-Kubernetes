@@ -59,7 +59,7 @@ NAME        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
 cassandra   None         <none>        9042/TCP   10s
 ```
 
-Most applications deployed to Kubernetes should be cloud native and rely on external resources for their data (or state). However since Cassandra is a database we can use Stateful sets and Persistent Volumes to ensure resiliancy in our database.
+Most applications deployed to Kubernetes should be cloud native and rely on external resources for their data (or state). However since Cassandra is a database we can use Stateful sets and Persistent Volumes to ensure resiliency in our database.
 
 ### 2. Create Local Volumes
 

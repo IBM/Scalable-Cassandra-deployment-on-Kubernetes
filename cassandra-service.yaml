@@ -11,25 +11,3 @@ spec:
     - port: 9042
   selector:
     app: cassandra
----
-apiVersion: batch/v1
-kind: Job
-metadata: {name: scalable-cassandra-deployment-on-kubernetes-metrics}
-spec:
-  template:
-    metadata: {name: scalable-cassandra-deployment-on-kubernetes-metrics}
-    spec:
-      containers:
-        - env:
-            - {name: config, value: '{
-                "repository_id": "Scalable-Cassandra-deployment-on-Kubernetes",
-                "target_services": [null],
-                "target_runtimes": ["Kubernetes Cluster"],
-                "event_id": "web",
-                "event_organizer": "dev-journeys"}'}
-            - {name: language, value: ''}
-          image: journeycode/kubernetes:latest
-          name: scalable-cassandra-deployment-on-kubernetes-metrics
-          resources:
-            limits: {cpu: 100m}
-      restartPolicy: Never

@@ -15,25 +15,25 @@ We also utilize a ["headless" service](https://kubernetes.io/docs/concepts/servi
 
 ## Kubernetes Concepts Used
 
-* [Kubenetes Pods](https://kubernetes.io/docs/user-guide/pods)
-* [Kubenetes Services](https://kubernetes.io/docs/user-guide/services)
+* [Kubenetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+* [Kubenetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 * [Kubernets StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## Included Components
-* [Kubernetes Clusters](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
-* [Bluemix container service](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
-* [IBM Cloud Private](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)
-* [Cassandra](http://cassandra.apache.org/)
+* [Kubernetes Clusters](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov)
+* [Bluemix container service](https://cloud.ibm.com/catalog?taxonomyNavigation=apps&category=containers)
+* [IBM Cloud Private](https://www.ibm.com/cloud/private)
+* [Cassandra](https://cassandra.apache.org/)
 
 ## Getting Started
 
 In order to follow this guide you'll need a Kubernetes cluster. If you do not have access to an existing Kubernetes cluster then follow the instructions (in the link) for one of the following:
 
-* [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube) on your workstation
+* [Minikube](https://kubernetes.io/docs/setup/minikube/) on your workstation
 * [IBM Bluemix Container Service](https://github.com/IBM/container-journey-template#container-journey-template---creating-a-kubernetes-cluster) to deploy in an IBM managed cluster (free small cluster)
 * [IBM Cloud Private - Community Edition](https://github.com/IBM/deploy-ibm-cloud-private/blob/master/README.md) for a self managed Kubernetes Cluster (in Vagrant, Softlayer or OpenStack)
 
-_The code here is regularly tested against [Kubernetes Cluster from Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov) using Travis CI._
+_The code here is regularly tested against [Kubernetes Cluster from Bluemix Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) using Travis CI._
 
 After installing (or setting up your access to) Kubernetes ensure that you can access it by running the following and confirming you get version responses for both the Client and the Server:
 
@@ -73,7 +73,7 @@ The provided [local-volumes.yaml](local-volumes.yaml) file already has **3** Per
 
 ```shell
 $ kubectl create -f local-volumes.yaml
-$ kubectl get pv   
+$ kubectl get pv
 NAME               CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS      CLAIM     STORAGECLASS   REASON    AGE
 cassandra-data-1   1Gi        RWO           Recycle         Available                                      7s
 cassandra-data-2   1Gi        RWO           Recycle         Available                                      7s
@@ -167,7 +167,7 @@ _You will need to wait for the status of the nodes to be Up and Normal (UN) to e
 You can access the cassandra container using the following command:
 
 ```shell
-kubectl exec -it cassandra-0 cqlsh    
+kubectl exec -it cassandra-0 cqlsh
 Connected to Cassandra at 127.0.0.1:9042.
 [cqlsh 5.0.1 | Cassandra 3.11.1 | CQL spec 3.4.4 | Native protocol v4]
 Use HELP for help.
@@ -180,7 +180,7 @@ events  sessions
 Keyspace system_schema
 ----------------------
 tables     triggers    views    keyspaces  dropped_columns
-functions  aggregates  indexes  types      columns        
+functions  aggregates  indexes  types      columns
 
 Keyspace system_auth
 --------------------
@@ -189,10 +189,10 @@ resource_role_permissons_index  role_permissions  role_members  roles
 Keyspace system
 ---------------
 available_ranges          peers               batchlog        transferred_ranges
-batches                   compaction_history  size_estimates  hints             
-prepared_statements       sstable_activity    built_views   
-"IndexInfo"               peer_events         range_xfers   
-views_builds_in_progress  paxos               local         
+batches                   compaction_history  size_estimates  hints
+prepared_statements       sstable_activity    built_views
+"IndexInfo"               peer_events         range_xfers
+views_builds_in_progress  paxos               local
 
 Keyspace system_distributed
 ---------------------------
@@ -201,9 +201,9 @@ repair_history  view_build_status  parent_repair_history
 ```
 
 ## License
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
+[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
 
 ## Troubleshooting
 
@@ -218,4 +218,4 @@ This code pattern is licensed under the Apache Software License, Version 2.  Sep
 	* `kubectl delete statefulset,pvc,pv,svc -l app=cassandra`
 
 ## References
-* This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/examples/storage/cassandra).
+* This Cassandra example is based on Kubernete's [Cloud Native Deployments of Cassandra using Kubernetes](https://github.com/kubernetes/examples/tree/master/cassandra).

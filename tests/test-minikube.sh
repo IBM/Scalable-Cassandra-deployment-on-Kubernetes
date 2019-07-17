@@ -33,7 +33,7 @@ kubectl_deploy() {
 
 verify_deploy(){
     echo "Verifying deployment was successful"
-    if ! sleep 1 && kubectl exec -ti cassandra-0 -- nodetool status; then
+    if ! (sleep 1 && kubectl exec -ti cassandra-0 -- nodetool status); then
         test_failed "$0"
     fi
 }

@@ -9,7 +9,7 @@ CASSANDRA_SEEDS=$(host "$CASSANDRA_SEED_DISCOVERY" | \
     awk '{print $4}' | \
 xargs)
 
-if [ ! -z "$CASSANDRA_SEEDS" ]; then
+if [ -n "$CASSANDRA_SEEDS" ]; then
     CASSANDRA_SEEDS=${CASSANDRA_SEEDS// /,}
     export CASSANDRA_SEEDS
 fi

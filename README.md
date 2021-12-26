@@ -167,7 +167,7 @@ _You will need to wait for the status of the nodes to be Up and Normal (UN) to e
 You can access the cassandra container using the following command:
 
 ```shell
-kubectl exec -it cassandra-0 cqlsh
+$ kubectl exec -it cassandra-0 cqlsh
 Connected to Cassandra at 127.0.0.1:9042.
 [cqlsh 5.0.1 | Cassandra 3.11.1 | CQL spec 3.4.4 | Native protocol v4]
 Use HELP for help.
